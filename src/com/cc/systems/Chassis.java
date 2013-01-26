@@ -49,7 +49,7 @@ public class Chassis
         tmpRight += xVal * -1.0;
         tmpRight = normalize( tmpRight );
 
-        rightMotor1.set( tmpRight * -1.0 );
+        rightMotor1.set( tmpRight );
 
 //        System.out.println( "x: " + xVal + "  y: " + yVal + "  left: " + tmpLeft + "   rgt: " + tmpRight );
 //        Timer.delay( 0.5 );
