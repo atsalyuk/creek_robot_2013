@@ -29,8 +29,8 @@ public class Driver
     private static final double XEXPO = 0.4;
     private static final double YEXPO = 0.4;
     private static final double ROTEXPO = 0.6;
-    private static final double MAX_SPEED = 0.75;
-    private static final double MIN_SPEED = -0.75;
+    private static final double MAX_SPEED = 0.4;
+    private static final double MIN_SPEED = -0.4;
 
     private Driver()
     {

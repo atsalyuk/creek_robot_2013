@@ -39,14 +39,14 @@ public class Chassis
     {
         double tmpLeft = yVal;
 
-        tmpLeft += xVal;
+        tmpLeft += xVal * -1.0;
         tmpLeft = normalize( tmpLeft );
 
         leftMotor1.set( tmpLeft );
 
         double tmpRight = yVal;
 
-        tmpRight += xVal * -1.0;
+        tmpRight += xVal;// * -1.0;
         tmpRight = normalize( tmpRight );
 
         rightMotor1.set( tmpRight );
