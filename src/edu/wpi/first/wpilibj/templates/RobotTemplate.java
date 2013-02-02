@@ -9,6 +9,7 @@ package edu.wpi.first.wpilibj.templates;
 import com.cc.inputs.driver.Driver;
 import com.cc.outputs.motor.CCVictor;
 import com.cc.systems.Chassis;
+import com.cc.systems.Mechanism;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.Encoder;
@@ -27,8 +28,9 @@ public class RobotTemplate extends SimpleRobot
 {
 
     Chassis chassis = null;
+    Mechanism mechanism = null;
     Driver driver = null;
-    CCVictor dumper;
+//    CCVictor dumper;
     DigitalInput swIn;
     DigitalOutput ledOut;
     Encoder encoder;
@@ -40,11 +42,12 @@ public class RobotTemplate extends SimpleRobot
 
         driver = Driver.getInstance();
         chassis = Chassis.getInstance();
-        dumper = new CCVictor( 6, false );
+        mechanism = Mechanism.getInstance();
+//        dumper = new CCVictor( 6, false );
 //        swIn = new DigitalInput(1);
 //        ledOut = new DigitalOutput(2);
-        encoder = new Encoder(13,14);
-//        gyro = new Gyro();
+        encoder = new Encoder( 13, 14 );
+        gyro = new Gyro( 1 );
     }
 
     protected void disabled()
@@ -70,7 +73,7 @@ public class RobotTemplate extends SimpleRobot
         {
             // Drive it
             chassis.drive( driver.getX(), driver.getY() );
-            dumper.set( driver.getRot());
+//            dumper.set( driver.getRot());
         }
     }
 
@@ -84,18 +87,31 @@ public class RobotTemplate extends SimpleRobot
        while (isEnabled())
         {
             
-            chassis.drive( 0.0 , 0.2 );
+            chassis.drive( 0.0 , 0.15 );
 //            ledOut.set( swIn.get());
 //            driver.getX();
 //            ledOut.set( true );
-            Timer.delay( 1.0 );
+            Timer.delay( 5.0 );
 //            ledOut.set( false );
 //            Timer.delay( 0.5 );
             System.out.println("Encoder val: "+encoder.get());
             chassis.stop();
             encoder.reset();
-            Timer.delay( 5.0);
+            Timer.delay( 10.0);
         }
        encoder.stop();
+       
+//        while ( isEnabled() )
+//        {
+//
+//            Timer.delay( 0.5 );
+//            System.out.println( "Angle of Robot: " + gyro.getAngle() );
+//        }
+       
+//        while ( isEnabled() )
+//        {
+//            Timer.delay( 0.5 );
+//            driver.getRawButton();
+//        }
     }
 }

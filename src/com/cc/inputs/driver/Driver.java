@@ -15,22 +15,26 @@ public class Driver
 
     private static Driver INSTANCE = null;
     private final Joystick joy;
-    private static final double XCENTER = 0.008;
-    private static final double YCENTER = 0.031;
-    private static final double ROTCENTER = 0.016;
-    private static final double XMIN = -0.641;
-    private static final double XMAX = 0.654;
-    private static final double YMIN = -0.570 - YCENTER;
-    private static final double YMAX = 0.646 - YCENTER;
+    private static final double XCENTER = 0.000;
+    private static final double YCENTER = 0.016;
+    private static final double ROTCENTER = 0.039;
+    private static final double XMIN = -0.711;
+    private static final double XMAX = 0.803;
+    private static final double YMIN = -0.586 - YCENTER;
+    private static final double YMAX = 0.685 - YCENTER;
     private static final double ZMIN = -1.0;
     private static final double ZMAX = 1.0;
-    private static final double ROTMIN = -0.648 - ROTCENTER;
-    private static final double ROTMAX = 0.717 - ROTCENTER;
+    private static final double ROTMIN = -0.734 - ROTCENTER;
+    private static final double ROTMAX = 0.882 - ROTCENTER;
     private static final double XEXPO = 0.4;
     private static final double YEXPO = 0.4;
     private static final double ROTEXPO = 0.6;
     private static final double MAX_SPEED = 0.4;
     private static final double MIN_SPEED = -0.4;
+    //Left hand y-axis max 0.843
+    //left hand y-axis min -0.406
+    //Left switch facing away: false
+    //Right switch facing away: false
 
     private Driver()
     {
