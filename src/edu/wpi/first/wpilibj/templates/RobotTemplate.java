@@ -7,7 +7,6 @@
 package edu.wpi.first.wpilibj.templates;
 
 import com.cc.inputs.driver.Driver;
-import com.cc.outputs.motor.CCVictor;
 import com.cc.systems.Chassis;
 import com.cc.systems.Mechanism;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -28,7 +27,6 @@ public class RobotTemplate extends SimpleRobot
     Chassis chassis = null;
     Mechanism mechanism = null;
     Driver driver = null;
-//    CCVictor dumper;
     DigitalInput swIn;
     DigitalOutput ledOut;
 
@@ -39,7 +37,6 @@ public class RobotTemplate extends SimpleRobot
         driver = Driver.getInstance();
         chassis = Chassis.getInstance();
         mechanism = Mechanism.getInstance();
-//        dumper = new CCVictor( 6, false );
 //        swIn = new DigitalInput(1);
 //        ledOut = new DigitalOutput(2);
     }
@@ -80,7 +77,9 @@ public class RobotTemplate extends SimpleRobot
         {
             // Drive it
             chassis.drive( driver.getX(), driver.getY() );
-            System.out.println( driver.getX() );
+
+            mechanism.moveArm( driver.getRedButton(), driver.getBlackButton() );
+
         }
     }
 
@@ -97,7 +96,5 @@ public class RobotTemplate extends SimpleRobot
             Timer.delay( 1 );
             
         }
-
-       
     }
 }

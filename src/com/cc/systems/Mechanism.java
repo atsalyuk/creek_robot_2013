@@ -5,15 +5,16 @@
 package com.cc.systems;
 
 import com.cc.outputs.motor.CCVictor;
-import com.cc.inputs.driver.LimitSwitch;
+import com.cc.inputs.digitalInputs.LimitSwitch;
 
 /**
  *
- * @author TestingMachine
+ * @author Henry
  */
 public class Mechanism
 {
     private static Mechanism INSTANCE= null;
+    private boolean armIsMoving = false;
     CCVictor armMotor = null;
     LimitSwitch armSwitch = null;
     
@@ -35,11 +36,23 @@ public class Mechanism
         return INSTANCE;
     }
     
-    public void moveArm( double yVal )
+    public void moveArm( boolean red, boolean black) //dump the cargo and what not
     {
-        
-        
-        
+       
+        if( red && !black && !armIsMoving)
+        {
+            armMotor.set( 0.71 );
+            armIsMoving = true;
+        }
+        else if( !red && black && armIsMoving)
+        {
+            armMotor.set( -0.15 );
+            armIsMoving = false;
+        }
+        else if( red && black)
+        {
+            //Do nothing
+        }
     }
     
     public void stopArm()

@@ -112,7 +112,7 @@ public class Chassis
 
         encoder.start();
 
-        while ( Math.abs(encoder.get()) < ticksToTravel )
+        while ( Math.abs( encoder.get() ) < ticksToTravel )
         {
             this.drive( 0.0, speed );
         }
@@ -127,21 +127,11 @@ public class Chassis
     {
         gyro.reset();
 
-        if ( angleToTurn > 0 )
+            while ( Math.abs(gyro.getAngle()) < angleToTurn )
         {
+            this.drive( speed, 0.0 );
+        }
 
-            while ( gyro.getAngle() < angleToTurn )
-            {
-                this.drive( speed, 0.0 );
-            }
-        }
-        else
-        {
-            while ( gyro.getAngle() > angleToTurn )
-            {
-                this.drive( -speed, 0.0 );
-            }
-        }
 
         this.stop();
         System.out.println( "Angle of Robot: " + gyro.getAngle() );
