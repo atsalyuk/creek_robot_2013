@@ -14,6 +14,7 @@ import com.cc.inputs.digitalInputs.LimitSwitch;
 public class Mechanism
 {
     private static Mechanism INSTANCE= null;
+    private boolean armIsMoving = false;
     CCVictor armMotor = null;
     LimitSwitch armSwitch = null;
     
@@ -35,11 +36,23 @@ public class Mechanism
         return INSTANCE;
     }
     
-    public void moveArm( double rotVal )
+    public void moveArm( boolean red, boolean black) //dump the cargo and what not
     {
-        armMotor.set( rotVal );
-        //Needs more work.
-      
+       
+        if( red && !black && !armIsMoving)
+        {
+            armMotor.set( 0.71 );
+            armIsMoving = true;
+        }
+        else if( !red && black && armIsMoving)
+        {
+            armMotor.set( -0.15 );
+            armIsMoving = false;
+        }
+        else if( red && black)
+        {
+            //Do nothing
+        }
     }
     
     public void stopArm()
