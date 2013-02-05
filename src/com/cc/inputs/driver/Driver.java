@@ -29,8 +29,8 @@ public class Driver
     private static final double XEXPO = 0.4;
     private static final double YEXPO = 0.4;
     private static final double ROTEXPO = 0.6;
-    private static final double MAX_SPEED = 0.4;
-    private static final double MIN_SPEED = -0.4;
+    private static final double MAX_SPEED = 1.0;
+    private static final double MIN_SPEED = -1.0;
     //Left hand y-axis max 0.843
     //left hand y-axis min -0.406
     //Left switch facing away: false

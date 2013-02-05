@@ -6,7 +6,9 @@ package com.cc.systems;
 
 import com.cc.outputs.motor.CCVictor;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.Watchdog;
+import edu.wpi.first.wpilibj.Encoder;
 
 /**
  *
@@ -18,11 +20,16 @@ public class Chassis
     private static Chassis INSTANCE = null;
     CCVictor leftMotor1 = null;
     CCVictor rightMotor1 = null;
+    Encoder encoder = null;
+    Gyro gyro = null;
+    private final static double TICKSPERINCH = 19.581;
 
     private Chassis()
     {
         leftMotor1 = new CCVictor( 9, true );
         rightMotor1 = new CCVictor( 10, false );
+        encoder = new Encoder( 13, 14 );
+        gyro = new Gyro( 1 );
     }
 
     public static Chassis getInstance()
@@ -88,5 +95,57 @@ public class Chassis
         Timer.delay( 5.0 );
         drive( 1.0, 1.0 );
         Timer.delay( 5.0 );
+    }
+
+    public void driveDistance( double distanceToTravel, double speed, boolean useFeet )
+    {
+        double ticksToTravel;
+
+        if ( useFeet )
+        {
+            ticksToTravel = (distanceToTravel * 12) * TICKSPERINCH;
+        }
+        else
+        {
+            ticksToTravel = distanceToTravel * TICKSPERINCH;
+        }
+
+        encoder.start();
+
+        while ( Math.abs(encoder.get()) < ticksToTravel )
+        {
+            this.drive( 0.0, speed );
+        }
+
+        this.stop();
+
+        encoder.stop();
+        encoder.reset();
+    }
+
+    public void turnAngle( double angleToTurn, double speed )
+    {
+        gyro.reset();
+
+        if ( angleToTurn > 0 )
+        {
+
+            while ( gyro.getAngle() < angleToTurn )
+            {
+                this.drive( speed, 0.0 );
+            }
+        }
+        else
+        {
+            while ( gyro.getAngle() > angleToTurn )
+            {
+                this.drive( -speed, 0.0 );
+            }
+        }
+
+        this.stop();
+        System.out.println( "Angle of Robot: " + gyro.getAngle() );
+
+        gyro.reset();
     }
 }
