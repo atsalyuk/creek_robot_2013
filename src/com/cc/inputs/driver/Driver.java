@@ -26,9 +26,9 @@ public class Driver
     private static final double ZMAX = 1.0;
     private static final double ROTMIN = -0.734 - ROTCENTER;
     private static final double ROTMAX = 0.882 - ROTCENTER;
-    private static final double XEXPO = 0.4;
+    private static final double XEXPO = 0.2;
     private static final double YEXPO = 0.4;
-    private static final double ROTEXPO = 0.6;
+    private static final double ROTEXPO = 0.0;
     private static final double MAX_SPEED = 1.0;
     private static final double MIN_SPEED = -1.0;
     //Left hand y-axis max 0.843

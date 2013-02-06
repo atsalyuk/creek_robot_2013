@@ -27,8 +27,8 @@ public class RobotTemplate extends SimpleRobot
     Chassis chassis = null;
     Mechanism mechanism = null;
     Driver driver = null;
-    DigitalInput swIn;
-    DigitalOutput ledOut;
+    DigitalInput switchOne;
+    DigitalInput switchTwo;
 
     protected void robotInit()
     {
@@ -37,8 +37,8 @@ public class RobotTemplate extends SimpleRobot
         driver = Driver.getInstance();
         chassis = Chassis.getInstance();
         mechanism = Mechanism.getInstance();
-//        swIn = new DigitalInput(1);
-//        ledOut = new DigitalOutput(2);
+        switchOne = new DigitalInput( 1 );
+        switchTwo = new DigitalInput( 2 );
     }
 
     protected void disabled()
@@ -51,19 +51,37 @@ public class RobotTemplate extends SimpleRobot
      */
     public void autonomous()
     {
-        chassis.driveDistance( 6.01, -0.25, true);
-        Timer.delay( 0.5 );
-        chassis.turnAngle( 95, 0.50);
-        Timer.delay( 0.5 );
-        chassis.driveDistance( 107, 0.25, false);
-        Timer.delay( 0.5 );
-        chassis.turnAngle( 95, -0.50 );
-        Timer.delay( 0.5 );
-        chassis.driveDistance( 200, 0.25, false);
-        Timer.delay( 0.5 );
-        chassis.turnAngle( 37, 0.5);
-        Timer.delay( 0.5 );
-        chassis.driveDistance( 95.8, 0.25, false);
+        boolean sOne = switchOne.get();
+        boolean sTwo = switchTwo.get();
+
+        if ( sOne || sTwo )
+        {
+            chassis.driveDistance( 6.01, -0.25, true );
+            Timer.delay( 0.5 );
+            chassis.turnAngle( 95, 0.50 );
+            Timer.delay( 0.5 );
+            if ( sOne && !sTwo )
+            {
+                chassis.driveDistance( 60, 0.25, false );
+            }
+            else if( !sOne && sTwo)
+            {
+                chassis.driveDistance( 107, 0.25, false );
+            }
+            else
+            {
+                chassis.driveDistance( 154, 0.25, false );
+            }
+            Timer.delay( 0.5 );
+            chassis.turnAngle( 95, -0.50 );
+            Timer.delay( 0.5 );
+            chassis.driveDistance( 200, 0.25, false );
+            Timer.delay( 0.5 );
+            chassis.turnAngle( 37, 0.5 );
+            Timer.delay( 0.5 );
+            chassis.driveDistance( 95.8, 0.25, false );
+
+        }
     }
 
     /**
@@ -78,7 +96,9 @@ public class RobotTemplate extends SimpleRobot
             // Drive it
             chassis.drive( driver.getX(), driver.getY() );
 
-            mechanism.moveArm( driver.getRedButton(), driver.getBlackButton() );
+//            mechanism.driveArm( driver.getRot() );
+            
+            mechanism.moveArm( driver.getRedButton() , driver.getBlackButton() );
 
         }
     }
@@ -89,12 +109,15 @@ public class RobotTemplate extends SimpleRobot
     public void test()
     {
         System.out.println( "In test" );
-        
-        while( isEnabled() )
+
+        while ( isEnabled() )
         {
-            driver.getRawButton();
-            Timer.delay( 1 );
+
+//            System.out.println( "Switch One: " + switchOne.get() + " Switch Two: " + switchTwo.get() );
+//            Timer.delay( 0.5 );
             
+            mechanism.driveArm( driver.getRot() );
+
         }
     }
 }
