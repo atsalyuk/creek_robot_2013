@@ -77,7 +77,7 @@ public class RobotTemplate extends SimpleRobot
             Timer.delay( 0.5 );
             chassis.driveDistance( 200, 0.25, false );
             Timer.delay( 0.5 );
-            chassis.turnAngle( 37, 0.5 );
+            chassis.turnAngle( 58.055555555, 0.5 );
             Timer.delay( 0.5 );
             chassis.driveDistance( 95.8, 0.25, false );
 
