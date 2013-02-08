@@ -9,8 +9,11 @@ package edu.wpi.first.wpilibj.templates;
 import com.cc.inputs.driver.Driver;
 import com.cc.systems.Chassis;
 import com.cc.systems.Mechanism;
+import edu.wpi.first.wpilibj.Accelerometer;
+import edu.wpi.first.wpilibj.AnalogChannel;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DigitalOutput;
+import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.SimpleRobot;
 import edu.wpi.first.wpilibj.Timer;
 
@@ -29,6 +32,9 @@ public class RobotTemplate extends SimpleRobot
     Driver driver = null;
     DigitalInput switchOne;
     DigitalInput switchTwo;
+//    Accelerometer accel;
+//    AnalogChannel analogOne;
+//    Gyro gyro;
 
     protected void robotInit()
     {
@@ -39,6 +45,9 @@ public class RobotTemplate extends SimpleRobot
         mechanism = Mechanism.getInstance();
         switchOne = new DigitalInput( 1 );
         switchTwo = new DigitalInput( 2 );
+//        accel = new Accelerometer( 2 );
+//        analogOne = new AnalogChannel( 2 );
+//        gyro = new Gyro( 2 );
     }
 
     protected void disabled()
@@ -117,6 +126,8 @@ public class RobotTemplate extends SimpleRobot
 //            Timer.delay( 0.5 );
             
             mechanism.driveArm( driver.getRot() );
+//            System.out.println( gyro.getAngle() );
+            Timer.delay( 0.5 );
 
         }
     }
