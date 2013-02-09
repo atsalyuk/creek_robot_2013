@@ -21,14 +21,14 @@ public class Mechanism
 //    private boolean armIsMoving = false;
     private int armState = 0;
     CCVictor armMotor = null;
-    LimitSwitch armSwitch = null;
+//    LimitSwitch armSwitch = null;
 //    AnalogChannel analogOne = null;
     Gyro gyro;
 
     private Mechanism()
     {
         armMotor = new CCVictor( 6, false );
-        armSwitch = new LimitSwitch( 3 );
+//        armSwitch = new LimitSwitch( 3 );
 //        analogOne = new AnalogChannel( 2 );
         gyro = new Gyro( 2 );
 

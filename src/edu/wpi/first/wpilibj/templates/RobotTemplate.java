@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.SimpleRobot;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.Ultrasonic;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -35,6 +36,7 @@ public class RobotTemplate extends SimpleRobot
 //    Accelerometer accel;
 //    AnalogChannel analogOne;
 //    Gyro gyro;
+    Ultrasonic sonar;
 
     protected void robotInit()
     {
@@ -48,6 +50,7 @@ public class RobotTemplate extends SimpleRobot
 //        accel = new Accelerometer( 2 );
 //        analogOne = new AnalogChannel( 2 );
 //        gyro = new Gyro( 2 );
+        sonar = new Ultrasonic( 3, 4 );
     }
 
     protected void disabled()
@@ -65,30 +68,31 @@ public class RobotTemplate extends SimpleRobot
 
         if ( sOne || sTwo )
         {
-            chassis.driveDistance( 6.01, -0.25, true );
+            chassis.driveDistance( 3.0, -0.40, true );
             Timer.delay( 0.5 );
             chassis.turnAngle( 95, 0.50 );
             Timer.delay( 0.5 );
             if ( sOne && !sTwo )
             {
-                chassis.driveDistance( 60, 0.25, false );
+                chassis.driveDistance( 60, 0.40, false );
             }
             else if( !sOne && sTwo)
             {
-                chassis.driveDistance( 107, 0.25, false );
+                chassis.driveDistance( 107, 0.40, false );
             }
             else
             {
-                chassis.driveDistance( 154, 0.25, false );
+                chassis.driveDistance( 154, 0.40, false );
             }
             Timer.delay( 0.5 );
-            chassis.turnAngle( 95, -0.50 );
+            chassis.turnAngle( 91, -0.50 );
             Timer.delay( 0.5 );
-            chassis.driveDistance( 200, 0.25, false );
+            chassis.driveDistance( 224, 0.50, false );
             Timer.delay( 0.5 );
             chassis.turnAngle( 58.055555555, 0.5 );
             Timer.delay( 0.5 );
-            chassis.driveDistance( 95.8, 0.25, false );
+            chassis.driveDistance( 31.8, 0.40, false );
+            Timer.delay( 0.5 );
 
         }
     }
@@ -119,16 +123,12 @@ public class RobotTemplate extends SimpleRobot
     {
         System.out.println( "In test" );
 
+        sonar.setDistanceUnits( Ultrasonic.Unit.kInches );
+        sonar.setEnabled( true );
+        
         while ( isEnabled() )
         {
-
-//            System.out.println( "Switch One: " + switchOne.get() + " Switch Two: " + switchTwo.get() );
-//            Timer.delay( 0.5 );
-            
-            mechanism.driveArm( driver.getRot() );
-//            System.out.println( gyro.getAngle() );
-            Timer.delay( 0.5 );
-
+            System.out.println( sonar.getRangeInches() );
         }
     }
 }
