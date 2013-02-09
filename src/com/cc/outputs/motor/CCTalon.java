@@ -15,10 +15,10 @@ public class CCTalon extends Talon
     
     private boolean reversed = false;
     
-    public CCTalon ( int channel, boolean direction )
+    public CCTalon ( int channel, boolean reversed )
     {
         super( channel );
-        reversed = direction;
+        this.reversed = reversed;
     }
     
     public void set( double speed )
