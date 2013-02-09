@@ -33,10 +33,6 @@ public class RobotTemplate extends SimpleRobot
     Driver driver = null;
     DigitalInput switchOne;
     DigitalInput switchTwo;
-//    Accelerometer accel;
-//    AnalogChannel analogOne;
-//    Gyro gyro;
-    Ultrasonic sonar;
 
     protected void robotInit()
     {
@@ -47,10 +43,6 @@ public class RobotTemplate extends SimpleRobot
         mechanism = Mechanism.getInstance();
         switchOne = new DigitalInput( 1 );
         switchTwo = new DigitalInput( 2 );
-//        accel = new Accelerometer( 2 );
-//        analogOne = new AnalogChannel( 2 );
-//        gyro = new Gyro( 2 );
-        sonar = new Ultrasonic( 3, 4 );
     }
 
     protected void disabled()
@@ -76,7 +68,7 @@ public class RobotTemplate extends SimpleRobot
             {
                 chassis.driveDistance( 60, 0.40, false );
             }
-            else if( !sOne && sTwo)
+            else if ( !sOne && sTwo )
             {
                 chassis.driveDistance( 107, 0.40, false );
             }
@@ -110,8 +102,8 @@ public class RobotTemplate extends SimpleRobot
             chassis.drive( driver.getX(), driver.getY() );
 
 //            mechanism.driveArm( driver.getRot() );
-            
-            mechanism.moveArm( driver.getRedButton() , driver.getBlackButton() );
+
+            mechanism.moveArm( driver.getRedButton(), driver.getBlackButton() );
 
         }
     }
@@ -123,12 +115,12 @@ public class RobotTemplate extends SimpleRobot
     {
         System.out.println( "In test" );
 
-        sonar.setDistanceUnits( Ultrasonic.Unit.kInches );
-        sonar.setEnabled( true );
-        
         while ( isEnabled() )
         {
-            System.out.println( sonar.getRangeInches() );
+
+            mechanism.driveArm( driver.getRot() );
+
         }
+
     }
 }

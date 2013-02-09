@@ -29,8 +29,8 @@ public class Driver
     private static final double XEXPO = 0.2;
     private static final double YEXPO = 0.4;
     private static final double ROTEXPO = 0.0;
-    private static final double MAX_SPEED = 1.0;
-    private static final double MIN_SPEED = -1.0;
+    private static double maxSpeed = 1.0;
+    private static double minSpeed = -1.0;
     //Left hand y-axis max 0.843
     //left hand y-axis min -0.406
     //Left switch facing away: false
@@ -53,13 +53,24 @@ public class Driver
 
     public double reduceSpeed( double speed )
     {
-        if ( speed < MIN_SPEED )
+        if( joy.getRawButton( 2 ) )
         {
-            return MIN_SPEED;
+            maxSpeed = 0.75;
+            minSpeed = -0.75;
         }
-        else if ( speed > MAX_SPEED )
+        else
         {
-            return MAX_SPEED;
+            maxSpeed = 0.4;
+            minSpeed = -0.4;
+        }
+        
+        if ( speed < minSpeed )
+        {
+            return minSpeed;
+        }
+        else if ( speed > maxSpeed )
+        {
+            return maxSpeed;
         }
         else
         {
@@ -189,6 +200,16 @@ public class Driver
     public boolean getBlackButton() //returns true if black button is pressed
     {
       return joy.getRawButton(4);
+    }
+    
+    public boolean getLeftSwitch() //returns true if left switch towards driver
+    {
+        return joy.getRawButton( 2 );
+    }
+    
+    public boolean getRightSwitch()
+    {
+        return joy.getRawButton( 3 );
     }
 
 }
