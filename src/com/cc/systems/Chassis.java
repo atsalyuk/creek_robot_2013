@@ -23,6 +23,7 @@ public class Chassis
     CCVictor rightMotor1 = null;
     Encoder encoder = null;
     Gyro gyro = null;
+    DirectionFix directionFix;
 //    Ultrasonic sonar = null;
     private final static double TICKSPERINCH = 19.581;
 
@@ -32,6 +33,9 @@ public class Chassis
         rightMotor1 = new CCVictor( 10, false );
         encoder = new Encoder( 13, 14 );
         gyro = new Gyro( 1 );
+        directionFix=DirectionFix.getInstance();
+        directionFix.initGyro(gyro);
+        
 //        sonar = new Ultrasonic( 3, 4 );
     }
 

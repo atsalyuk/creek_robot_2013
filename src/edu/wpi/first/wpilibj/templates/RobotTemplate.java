@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.Accelerometer;
 import edu.wpi.first.wpilibj.AnalogChannel;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DigitalOutput;
+import edu.wpi.first.wpilibj.DriverStationLCD;
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.SimpleRobot;
 import edu.wpi.first.wpilibj.Timer;
@@ -33,16 +34,23 @@ public class RobotTemplate extends SimpleRobot
     Driver driver = null;
     DigitalInput switchOne;
     DigitalInput switchTwo;
-
+    DriverStationLCD driverLCD;
+    
     protected void robotInit()
     {
         super.robotInit();
-
+        
         driver = Driver.getInstance();
         chassis = Chassis.getInstance();
         mechanism = Mechanism.getInstance();
         switchOne = new DigitalInput( 1 );
         switchTwo = new DigitalInput( 2 );
+        
+        //driver station hello world code
+          driverLCD=DriverStationLCD.getInstance();
+          driverLCD.println(DriverStationLCD.Line.kUser1,0,"hello word, dirver lcd test");
+        //end of hello world
+        
     }
 
     protected void disabled()
