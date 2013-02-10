@@ -146,6 +146,17 @@ public class Chassis
         gyro.reset();
     }
 
+    public double getLeftOffSet()
+    {
+       return 0.0; 
+    }
+    
+    public double getRightOffSet()
+    {
+       return 0.0;
+    }
+    
+    
 //    public void driveSonar( double speed, double distanceToTravel, boolean useFeet )
 //    {
 //        double ticksToTravel;
