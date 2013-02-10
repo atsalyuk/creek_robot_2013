@@ -109,6 +109,8 @@ public class RobotTemplate extends SimpleRobot
             // Drive it
             chassis.drive( driver.getX(), driver.getY() );
 
+            chassis.checkDirection();
+            
 //            mechanism.driveArm( driver.getRot() );
 
             mechanism.moveArm( driver.getRedButton(), driver.getBlackButton() );

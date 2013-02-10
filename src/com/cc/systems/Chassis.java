@@ -23,18 +23,17 @@ public class Chassis
     CCVictor rightMotor1 = null;
     Encoder encoder = null;
     Gyro gyro = null;
-    DirectionFix directionFix;
 //    Ultrasonic sonar = null;
     private final static double TICKSPERINCH = 19.581;
-
+    private double knownDirection;
+    
     private Chassis()
     {
         leftMotor1 = new CCVictor( 9, true );
         rightMotor1 = new CCVictor( 10, false );
         encoder = new Encoder( 13, 14 );
         gyro = new Gyro( 1 );
-        directionFix=DirectionFix.getInstance();
-        directionFix.initGyro(gyro);
+        
         
 //        sonar = new Ultrasonic( 3, 4 );
     }
@@ -133,7 +132,7 @@ public class Chassis
     public void turnAngle( double angleToTurn, double speed )
     {
 //        gyro.reset();
-
+        
         while ( Math.abs( gyro.getAngle() ) < angleToTurn )
         {
             this.drive( speed, 0.0 );
@@ -143,17 +142,14 @@ public class Chassis
         this.stop();
         System.out.println( "Angle of Robot: " + gyro.getAngle() );
 
+        knownDirection=angleToTurn; //setting angle that angle from the gyro will be compared against when robot is movieng in a strait line
+        
         gyro.reset();
     }
-
-    public double getLeftOffSet()
+  
+    public void checkDirection()
     {
-       return 0.0; 
-    }
-    
-    public double getRightOffSet()
-    {
-       return 0.0;
+        System.out.println(knownDirection-gyro.getAngle());
     }
     
     
