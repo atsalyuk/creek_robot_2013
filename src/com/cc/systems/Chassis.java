@@ -49,6 +49,11 @@ public class Chassis
         return INSTANCE;
     }
 
+    /**
+     * 
+     * @param xVal
+     * @param yVal 
+     */
     public void drive( double xVal, double yVal )
     {
         double tmpLeft = yVal;
