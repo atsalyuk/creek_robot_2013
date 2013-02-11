@@ -147,11 +147,7 @@ public class Chassis
         gyro.reset();
     }
   
-    public void checkDirection()
-    {
-        System.out.println(knownDirection-gyro.getAngle());
-    }
-    
+   
     
 //    public void driveSonar( double speed, double distanceToTravel, boolean useFeet )
 //    {
