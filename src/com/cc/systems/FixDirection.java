@@ -12,6 +12,15 @@ import edu.wpi.first.wpilibj.Gyro;
  */
 public class FixDirection 
 {
+    
+    
+    
+    
+    
+    //adding code for pid controll loop
+    
+  /* non pid loop code for direction correction  
+    
   private Gyro gyro;
   private double knownDirection;
   private double leftOffSet;
@@ -56,4 +65,5 @@ public class FixDirection
   {
       return rightOffSet;
   }
+  */
 }
