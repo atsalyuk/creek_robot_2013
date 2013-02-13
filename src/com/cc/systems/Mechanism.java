@@ -23,13 +23,11 @@ public class Mechanism
     private int armState = 0;
     CCTalon armMotor = null;
 //    CCVictor armMotor = null;
-//    Gyro gyro;
 
     private Mechanism()
     {
         armMotor = new CCTalon( 1, false );
 //        armMotor = new CCVictor ( 1, false );
-//        analogOne = new AnalogChannel( 2 );
 
     }
 
@@ -88,34 +86,6 @@ public class Mechanism
                 break;
 
         }
-
-//        System.out.println( gyro.getAngle() );
-
-//        if ( red && !black && !armIsMoving )
-//        {
-//            armMotor.set( 1.0 );
-//            armIsMoving = true;
-//            while ( analogOne.getValue() > 500 )
-//            {
-//                //Do Nothing
-//            }
-//            this.stopArm();
-//
-//        }
-//        else if ( !red && black && armIsMoving )
-//        {
-//            armMotor.set( -0.15 );
-//            armIsMoving = false;
-//            while ( analogOne.getValue() < 520 )
-//            {
-//                //Do Nothing
-//            }
-//            this.stopArm();
-//        }
-//        else if ( red && black )
-//        {
-//            //Do nothing
-//        }
 
     }
 

@@ -27,8 +27,8 @@ public class Chassis
     Encoder encoder = null;
     Gyro gyro = null;
 //    FixDirection fixdirect;
-    private final static double TICKSPERINCH = 20.146;
-//    private final static double TICKSPERINCH = 19.582
+    private final static double TICKSPERINCH = 20.146; //For the Competition Robot
+//    private final static double TICKSPERINCH = 19.582 //For the Practice Robot
 //    private double knownDirection;
     
     private Chassis()
@@ -52,11 +52,6 @@ public class Chassis
         return INSTANCE;
     }
 
-    /**
-     * 
-     * @param xVal
-     * @param yVal 
-     */
     public void drive( double xVal, double yVal )
     {
         
@@ -101,7 +96,7 @@ public class Chassis
     }
 
     /*
-     * Will send maximum and minimum values to Jaguars continuosly
+     * Will send maximum and minimum values to Talons/Victors continuosly
      */
     public void calibrate()
     {
@@ -142,7 +137,6 @@ public class Chassis
 
     public void turnAngle( double angleToTurn, double speed )
     {
-//        gyro.reset();
         
         while ( Math.abs( gyro.getAngle() ) < angleToTurn )
         {

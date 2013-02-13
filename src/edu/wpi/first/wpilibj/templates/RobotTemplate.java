@@ -31,9 +31,7 @@ public class RobotTemplate extends SimpleRobot
     Driver driver = null;
     DigitalInput switchOne;
     DigitalInput switchTwo;
-//    Encoder encoder;
 //    DriverStationLCD driverLCD;
-//    Talon motor;
     
     protected void robotInit()
     {
@@ -44,7 +42,6 @@ public class RobotTemplate extends SimpleRobot
         mechanism = Mechanism.getInstance();
         switchOne = new DigitalInput( 1 );
         switchTwo = new DigitalInput( 2 );
-//        encoder = new Encoder( 13, 14);
         
 //        driver station hello world code
 //          driverLCD=DriverStationLCD.getInstance();
@@ -124,11 +121,7 @@ public class RobotTemplate extends SimpleRobot
 //        while ( isEnabled() )
         {
 //            mechanism.driveArm( driver.getRot() );
-            
-//            mechanism.driveArm( -0.50 );
-//            Timer.delay( 5.0 );
-//            mechanism.stopArm();
-            
+                        
             chassis.driveDistance( 10, 0.25, true);
             
 //            encoder.start();

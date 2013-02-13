@@ -190,7 +190,7 @@ public class Driver
         System.out.print( " " + str + ":" + val );
     }
 
-    //this may be wrong:1=red 4=black 
+    //1=red 4=black 
     
     public boolean getRedButton() //returns true if red button is pressed
     {
