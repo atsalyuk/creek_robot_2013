@@ -22,14 +22,14 @@ public class Mechanism
     ;
     private int armState = 0;
     CCTalon armMotor = null;
-//    AnalogChannel analogOne = null;
-    Gyro gyro;
+//    CCVictor armMotor = null;
+//    Gyro gyro;
 
     private Mechanism()
     {
-        armMotor = new CCTalon( 6, false );
+        armMotor = new CCTalon( 1, false );
+//        armMotor = new CCVictor ( 1, false );
 //        analogOne = new AnalogChannel( 2 );
-        gyro = new Gyro( 2 );
 
     }
 
@@ -53,15 +53,14 @@ public class Mechanism
                 if ( red )
                 {
                     armState = 1;
-                    armMotor.set( 0.75 );
-                    gyro.reset();
+                    armMotor.set( 0.65 );
                 }
 
                 break;
 
             case 1: // Stop Motor
 
-                Timer.delay( 0.5 );
+                Timer.delay( 0.15 );
 
                 armState = 2;
                 this.stopArm();
@@ -75,7 +74,6 @@ public class Mechanism
                 {
                     armState = 3;
                     armMotor.set( -0.25 );
-                    gyro.reset();
                 }
 
                 break;
@@ -91,7 +89,7 @@ public class Mechanism
 
         }
 
-        System.out.println( gyro.getAngle() );
+//        System.out.println( gyro.getAngle() );
 
 //        if ( red && !black && !armIsMoving )
 //        {

@@ -4,6 +4,7 @@
  */
 package com.cc.systems;
 
+import com.cc.outputs.motor.CCTalon;
 import com.cc.outputs.motor.CCVictor;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.Gyro;
@@ -19,23 +20,26 @@ public class Chassis
 {
 
     private static Chassis INSTANCE = null;
-    CCVictor leftMotor1 = null;
-    CCVictor rightMotor1 = null;
+//    CCVictor leftMotor1 = null;
+//    CCVictor rightMotor1 = null;
+    CCTalon leftMotor1 = null;
+    CCTalon rightMotor1 = null;
     Encoder encoder = null;
     Gyro gyro = null;
-    FixDirection fixdirect;
-//    Ultrasonic sonar = null;
-    private final static double TICKSPERINCH = 19.581;
-    private double knownDirection;
+//    FixDirection fixdirect;
+    private final static double TICKSPERINCH = 20.146;
+//    private final static double TICKSPERINCH = 19.582
+//    private double knownDirection;
     
     private Chassis()
     {
-        leftMotor1 = new CCVictor( 9, true );
-        rightMotor1 = new CCVictor( 10, false );
+//        leftMotor1 = new CCVictor( 9, true );
+//        rightMotor1 = new CCVictor( 10, false );
+        leftMotor1 = new CCTalon( 4, false );
+        rightMotor1 = new CCTalon( 3, true );
         encoder = new Encoder( 13, 14 );
         gyro = new Gyro( 1 );
-        fixdirect=new FixDirection(gyro);
-        
+//        fixdirect=new FixDirection(gyro);
 //        sonar = new Ultrasonic( 3, 4 );
     }
 
@@ -51,6 +55,7 @@ public class Chassis
 
     public void drive( double xVal, double yVal )
     {
+        
         double tmpLeft = yVal;
 
         tmpLeft += xVal * -1.0;
@@ -64,9 +69,9 @@ public class Chassis
         tmpRight = normalize( tmpRight );
 
         rightMotor1.set( tmpRight );
-
+        
 //        System.out.println( "x: " + xVal + "  y: " + yVal + "  left: " + tmpLeft + "   rgt: " + tmpRight );
-//        Timer.delay( 0.5 );
+        Timer.delay( 0.5 );
     }
 
     private double normalize( double val )
@@ -122,6 +127,7 @@ public class Chassis
         while ( Math.abs( encoder.get() ) < ticksToTravel )
         {
             this.drive( 0.0, speed );
+            System.out.println( "Encoder: " + encoder.get() );
         }
 
         this.stop();
@@ -143,36 +149,41 @@ public class Chassis
         this.stop();
         System.out.println( "Angle of Robot: " + gyro.getAngle() );
 
-        knownDirection=angleToTurn; //setting angle that angle from the gyro will be compared against when robot is movieng in a strait line
+//        knownDirection=angleToTurn; //setting angle that angle from the gyro will be compared against when robot is movieng in a strait line
         
         gyro.reset();
     }
   
    
     
-//    public void driveSonar( double speed, double distanceToTravel, boolean useFeet )
-//    {
-//        double ticksToTravel;
-//
-//        if ( useFeet )
-//        {
-//            ticksToTravel = (distanceToTravel * 12) * TICKSPERINCH;
-//        }
-//        else
-//        {
-//            ticksToTravel = distanceToTravel * TICKSPERINCH;
-//        }
-//
-//        encoder.start();
-//
-//        while ( Math.abs( encoder.get() ) < ticksToTravel || sonar.getRangeInches() > 24 )
-//        {
-//            this.drive( 0.0, speed );
-//        }
-//
-//        this.stop();
-//
-//        encoder.stop();
-//        encoder.reset();
-//    }
+    public void driveSonar( double speed, double distanceToTravel, boolean useFeet )
+    {
+        double ticksToTravel;
+
+        if ( useFeet )
+        {
+            ticksToTravel = (distanceToTravel * 12) * TICKSPERINCH;
+        }
+        else
+        {
+            ticksToTravel = distanceToTravel * TICKSPERINCH;
+        }
+
+        encoder.start();
+
+        while ( Math.abs( encoder.get() ) < ticksToTravel )
+        {
+            this.drive( 0.0, speed );
+        }
+
+        this.stop();
+
+        encoder.stop();
+        encoder.reset();
+    }
+    
+    public void printValues()
+    {
+        System.out.println( "Gyro: " + gyro.getAngle() + " Encoder: " + encoder.get() );
+    }
 }

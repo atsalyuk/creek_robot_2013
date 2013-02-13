@@ -168,12 +168,12 @@ public class Driver
 
     public boolean getLeftFrontSw()
     {
-        return joy.getRawButton( 1 );
+        return joy.getRawButton( 2 );
     }
 
     public boolean getRightFrontSw()
     {
-        return joy.getRawButton( 2 );
+        return joy.getRawButton( 3 );
     }
 
     public void getRawButton()

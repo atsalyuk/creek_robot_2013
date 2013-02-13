@@ -9,15 +9,12 @@ package edu.wpi.first.wpilibj.templates;
 import com.cc.inputs.driver.Driver;
 import com.cc.systems.Chassis;
 import com.cc.systems.Mechanism;
-import edu.wpi.first.wpilibj.Accelerometer;
-import edu.wpi.first.wpilibj.AnalogChannel;
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.DriverStationLCD;
-import edu.wpi.first.wpilibj.Gyro;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SimpleRobot;
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.Ultrasonic;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -34,7 +31,9 @@ public class RobotTemplate extends SimpleRobot
     Driver driver = null;
     DigitalInput switchOne;
     DigitalInput switchTwo;
-    DriverStationLCD driverLCD;
+//    Encoder encoder;
+//    DriverStationLCD driverLCD;
+//    Talon motor;
     
     protected void robotInit()
     {
@@ -45,10 +44,11 @@ public class RobotTemplate extends SimpleRobot
         mechanism = Mechanism.getInstance();
         switchOne = new DigitalInput( 1 );
         switchTwo = new DigitalInput( 2 );
+//        encoder = new Encoder( 13, 14);
         
-        //driver station hello world code
-          driverLCD=DriverStationLCD.getInstance();
-          driverLCD.println(DriverStationLCD.Line.kUser1,0,"hello word, dirver lcd test");
+//        driver station hello world code
+//          driverLCD=DriverStationLCD.getInstance();
+//          driverLCD.println(DriverStationLCD.Line.kUser1,0,"hello word, dirver lcd test");
         //end of hello world
         
     }
@@ -108,8 +108,6 @@ public class RobotTemplate extends SimpleRobot
         {
             // Drive it
             chassis.drive( driver.getX(), driver.getY() );
-            
-//            mechanism.driveArm( driver.getRot() );
 
             mechanism.moveArm( driver.getRedButton(), driver.getBlackButton() );
 
@@ -123,10 +121,23 @@ public class RobotTemplate extends SimpleRobot
     {
         System.out.println( "In test" );
 
-        while ( isEnabled() )
+//        while ( isEnabled() )
         {
-
-            mechanism.driveArm( driver.getRot() );
+//            mechanism.driveArm( driver.getRot() );
+            
+//            mechanism.driveArm( -0.50 );
+//            Timer.delay( 5.0 );
+//            mechanism.stopArm();
+            
+            chassis.driveDistance( 10, 0.25, true);
+            
+//            encoder.start();
+//            chassis.drive( 0.0, 0.35);
+//            Timer.delay( 5.0 );
+//            chassis.stop();
+//            System.out.println( "Encoder: " + encoder.get() );
+//            encoder.stop();
+//            encoder.reset();
 
         }
 
