@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.PIDController;
 
 /**
  *
- * @author dillon
+ * @author Dillon
  */
 public class FixDirection 
 {
