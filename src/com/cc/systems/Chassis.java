@@ -40,7 +40,6 @@ public class Chassis
         encoder = new Encoder( 13, 14 );
         gyro = new Gyro( 1 );
 //        fixdirect=new FixDirection(gyro);
-//        sonar = new Ultrasonic( 3, 4 );
     }
 
     public static Chassis getInstance()
@@ -53,6 +52,11 @@ public class Chassis
         return INSTANCE;
     }
 
+    /**
+     * 
+     * @param xVal
+     * @param yVal 
+     */
     public void drive( double xVal, double yVal )
     {
         

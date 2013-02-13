@@ -5,6 +5,7 @@
 package com.cc.systems;
 
 import edu.wpi.first.wpilibj.Gyro;
+import edu.wpi.first.wpilibj.PIDController;
 
 /**
  *
@@ -12,6 +13,33 @@ import edu.wpi.first.wpilibj.Gyro;
  */
 public class FixDirection 
 {
+    
+    private Gyro gyro;
+    private PIDController pid;
+    private double kp; //proportional coefficient
+    private double ki; //integral coefficient
+    private double kd; //derivative coefficient
+    private double knownAngle; //what the robots angle should be
+    private double error; //amount of distance between ideal angle and real angle
+    
+    
+    public FixDirection(Gyro gyro)
+    {
+        this.gyro=gyro;
+    }
+    
+    public void setAngle(double angle)
+    {
+        knownAngle=angle;
+    }
+  
+    public double getError()
+    {
+        return knownAngle-gyro.getAngle();
+    }
+    
+  /* non pid loop code for direction correction  
+    
   private Gyro gyro;
   private double knownDirection;
   private double leftOffSet;
@@ -56,4 +84,5 @@ public class FixDirection
   {
       return rightOffSet;
   }
+  */
 }
