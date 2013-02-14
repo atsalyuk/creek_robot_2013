@@ -29,6 +29,7 @@ public class Driver
     private static final double XEXPO = 0.2;
     private static final double YEXPO = 0.4;
     private static final double ROTEXPO = 0.0;
+    private static final double XSCALE = 1.3;
     private static double maxSpeed = 1.0;
     private static double minSpeed = -1.0;
     //Left hand y-axis max 0.843
@@ -51,19 +52,27 @@ public class Driver
         return INSTANCE;
     }
 
-    public double reduceSpeed( double speed )
+    public double reduceSpeed( double speed, boolean xAxis )
     {
-        if( joy.getRawButton( 2 ) )
+        if ( xAxis )
         {
-            maxSpeed = 0.75;
-            minSpeed = -0.75;
+            maxSpeed = XMAX;
+            minSpeed = XMIN;
         }
         else
         {
-            maxSpeed = 0.4;
-            minSpeed = -0.4;
+            if ( joy.getRawButton( 2 ) )
+            {
+                maxSpeed = 0.75;
+                minSpeed = -0.75;
+            }
+            else
+            {
+                maxSpeed = 0.4;
+                minSpeed = -0.4;
+            }
         }
-        
+
         if ( speed < minSpeed )
         {
             return minSpeed;
@@ -81,7 +90,7 @@ public class Driver
     public double getY()
     {
         double y = normalize( joy.getAxis( Joystick.AxisType.kY ) - YCENTER, YMIN, YMAX ) * -1.0;
-        y = reduceSpeed( y );
+        y = reduceSpeed( y, false );
         y = expo( y, YEXPO );
 
         //System.out.print("y: " + y);
@@ -94,12 +103,12 @@ public class Driver
 //        System.out.println(joy.getAxis(Joystick.AxisType.kX));
 
         double x = normalize( joy.getAxis( Joystick.AxisType.kX ) - XCENTER, XMIN, XMAX );
-        x = reduceSpeed( x );
+        x = reduceSpeed( x, true );
         x = expo( x, XEXPO );
 
 //        System.out.println( " x: " + x );
 
-        return x;
+        return x * XSCALE;
     }
 
     public double getZ()
@@ -110,7 +119,7 @@ public class Driver
 
     public double getRot()
     {
-        double rot = normalize( joy.getRawAxis( 5 ), ROTMIN, ROTMAX ) * -1.0;
+        double rot = normalize( joy.getRawAxis( 5 ), ROTMIN, ROTMAX );
 
         rot = expo( rot, ROTEXPO );
 
@@ -191,25 +200,23 @@ public class Driver
     }
 
     //1=red 4=black 
-    
     public boolean getRedButton() //returns true if red button is pressed
     {
-      return joy.getRawButton(1);  
+        return joy.getRawButton( 1 );
     }
-    
+
     public boolean getBlackButton() //returns true if black button is pressed
     {
-      return joy.getRawButton(4);
+        return joy.getRawButton( 4 );
     }
-    
+
     public boolean getLeftSwitch() //returns true if left switch towards driver
     {
         return joy.getRawButton( 2 );
     }
-    
+
     public boolean getRightSwitch()
     {
         return joy.getRawButton( 3 );
     }
-
 }

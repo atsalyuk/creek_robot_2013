@@ -6,6 +6,7 @@
 /*----------------------------------------------------------------------------*/
 package edu.wpi.first.wpilibj.templates;
 
+import com.cc.inputs.digitalInputs.Sonar;
 import com.cc.inputs.driver.Driver;
 import com.cc.systems.Chassis;
 import com.cc.systems.Mechanism;
@@ -31,6 +32,8 @@ public class RobotTemplate extends SimpleRobot
     Driver driver = null;
     DigitalInput switchOne;
     DigitalInput switchTwo;
+    Sonar sonar;
+//    Encoder encoder;
 //    DriverStationLCD driverLCD;
     
     protected void robotInit()
@@ -42,6 +45,8 @@ public class RobotTemplate extends SimpleRobot
         mechanism = Mechanism.getInstance();
         switchOne = new DigitalInput( 1 );
         switchTwo = new DigitalInput( 2 );
+        sonar = new Sonar( 3, 4);
+//        encoder = new Encoder( 13, 14 );
         
 //        driver station hello world code
 //          driverLCD=DriverStationLCD.getInstance();
@@ -105,8 +110,15 @@ public class RobotTemplate extends SimpleRobot
         {
             // Drive it
             chassis.drive( driver.getX(), driver.getY() );
-
-            mechanism.moveArm( driver.getRedButton(), driver.getBlackButton() );
+            chassis.printValues();
+            if( driver.getRightSwitch() )
+            {
+                mechanism.driveArm( driver.getRot() );
+            }
+            else
+            {
+                mechanism.moveArm( driver.getRedButton(), driver.getBlackButton() );
+            }
 
         }
     }
@@ -121,8 +133,8 @@ public class RobotTemplate extends SimpleRobot
 //        while ( isEnabled() )
         {
 //            mechanism.driveArm( driver.getRot() );
-                        
-            chassis.driveDistance( 10, 0.25, true);
+            
+            chassis.driveDistance( 10, 0.50, true );
             
 //            encoder.start();
 //            chassis.drive( 0.0, 0.35);

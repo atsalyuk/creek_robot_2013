@@ -26,8 +26,8 @@ public class Chassis
     CCTalon rightMotor1 = null;
     Encoder encoder = null;
     Gyro gyro = null;
-//    FixDirection fixdirect;
-    private final static double TICKSPERINCH = 20.146; //For the Competition Robot
+//    FixDirection fixdirect7
+    private final static double TICKSPERINCH = 17.20; //For the Competition Robot
 //    private final static double TICKSPERINCH = 19.582 //For the Practice Robot
 //    private double knownDirection;
     
@@ -57,19 +57,19 @@ public class Chassis
         
         double tmpLeft = yVal;
 
-        tmpLeft += xVal * -1.0;
+        tmpLeft += xVal;// * -1.0;
         tmpLeft = normalize( tmpLeft );
 
         leftMotor1.set( tmpLeft );
 
         double tmpRight = yVal;
 
-        tmpRight += xVal;// * -1.0;
+        tmpRight += xVal * -1.0;
         tmpRight = normalize( tmpRight );
 
         rightMotor1.set( tmpRight );
         
-//        System.out.println( "x: " + xVal + "  y: " + yVal + "  left: " + tmpLeft + "   rgt: " + tmpRight );
+        System.out.println( "x: " + xVal + "  y: " + yVal + "  left: " + tmpLeft + "   rgt: " + tmpRight );
         Timer.delay( 0.5 );
     }
 
@@ -126,7 +126,8 @@ public class Chassis
         while ( Math.abs( encoder.get() ) < ticksToTravel )
         {
             this.drive( 0.0, speed );
-            System.out.println( "Encoder: " + encoder.get() );
+            Timer.delay( 0.05);
+//            System.out.println( "Encoder: " + encoder.get() );
         }
 
         this.stop();

@@ -91,6 +91,7 @@ public class Mechanism
 
     public void driveArm( double speed )
     {
+        armState = 0;
         armMotor.set( normalize( speed ) );
     }
 
