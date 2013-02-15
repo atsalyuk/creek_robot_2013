@@ -130,11 +130,10 @@ public class RobotTemplate extends SimpleRobot
     {
         System.out.println( "In test" );
 
-//        while ( isEnabled() )
+        while ( isEnabled() )
         {
-//            mechanism.driveArm( driver.getRot() );
+            System.out.println( sonar.calibrate() );
             
-            chassis.driveDistance( 10, 0.50, true );
             
 //            encoder.start();
 //            chassis.drive( 0.0, 0.35);

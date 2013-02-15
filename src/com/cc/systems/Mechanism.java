@@ -51,14 +51,14 @@ public class Mechanism
                 if ( red )
                 {
                     armState = 1;
-                    armMotor.set( 0.65 );
+                    armMotor.set( 0.625 );
                 }
 
                 break;
 
             case 1: // Stop Motor
 
-                Timer.delay( 0.15 );
+               Timer.delay( 0.12 );
 
                 armState = 2;
                 this.stopArm();
