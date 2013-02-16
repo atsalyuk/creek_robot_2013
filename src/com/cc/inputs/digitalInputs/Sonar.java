@@ -15,14 +15,16 @@ import edu.wpi.first.wpilibj.Timer;
 public class Sonar
 {
 
-    DigitalOutput trigger;
-    DigitalInput echo;
+    private DigitalOutput trigger; 
+    private DigitalInput echo;
     private static final double SOUNDSPEED = 0.0;
-
+    //private double soundspeed;
+    
     public Sonar( int triggerChannel, int echoChannel )
     {
         trigger = new DigitalOutput( triggerChannel );
         echo = new DigitalInput( echoChannel );
+        //soundspeed=calibrate();
     }
 
     public double getDistanceInches()
