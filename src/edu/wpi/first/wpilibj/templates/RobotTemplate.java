@@ -70,31 +70,31 @@ public class RobotTemplate extends SimpleRobot
 
         if ( sOne || sTwo )
         {
-            chassis.driveDistance( 3.0, -0.40, true );
-            Timer.delay( 0.5 );
-            chassis.turnAngle( 95, 0.50 );
-            Timer.delay( 0.5 );
-            if ( sOne && !sTwo )
-            {
-                chassis.driveDistance( 60, 0.40, false );
-            }
-            else if ( !sOne && sTwo )
-            {
-                chassis.driveDistance( 107, 0.40, false );
-            }
-            else
-            {
-                chassis.driveDistance( 154, 0.40, false );
-            }
-            Timer.delay( 0.5 );
-            chassis.turnAngle( 91, -0.50 );
-            Timer.delay( 0.5 );
-            chassis.driveDistance( 224, 0.50, false );
-            Timer.delay( 0.5 );
-            chassis.turnAngle( 58.055555555, 0.5 );
-            Timer.delay( 0.5 );
-            chassis.driveDistance( 31.8, 0.40, false );
-            Timer.delay( 0.5 );
+//            chassis.driveDistance( 2.4, -0.45, true );
+//            Timer.delay( 0.25 );
+//            chassis.turnAngle( 82, 0.60 );
+//            Timer.delay( 0.25 );
+//            if ( sOne && !sTwo )
+//            {
+//                chassis.driveDistance( 3.3, 0.55, true );
+//            }
+//            else if ( !sOne && sTwo )
+//            {
+//                chassis.driveDistance( 9.81, 0.55, true );
+//            }
+//            else
+//            {
+//                chassis.driveDistance( 14.12, 0.55, true );
+//            }
+//            Timer.delay( 0.25 );
+//            chassis.turnAngle( 95, -0.60 );
+//            Timer.delay( 0.25 );
+//            chassis.driveDistance( 16.85, 0.55, true );
+//            Timer.delay( 0.25 );
+//            chassis.turnAngle( 58.055555555, 0.6 );
+//            Timer.delay( 0.25 );
+//            chassis.driveDistance( 5.62, 0.55, true );
+//            Timer.delay( 0.25 );
 
         }
     }
@@ -134,7 +134,7 @@ public class RobotTemplate extends SimpleRobot
         {
 //            System.out.println( sonar.calibrate() );
             
-            chassis.driveDistance( 10, 0.45, true );
+            chassis.turnAngle( 90, 0.45 );
             
             
 //            encoder.start();

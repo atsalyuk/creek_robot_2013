@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.Watchdog;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Ultrasonic;
 
 /**
@@ -27,9 +28,10 @@ public class Chassis
     Encoder encoder = null;
     Gyro gyro = null;
 //    FixDirection fixdirect7
-    private final static double TICKSPERINCH = 17.20; //For the Competition Robot
+    private final static double TICKSPERINCH = 15.43; //For the Competition Robot
 //    private final static double TICKSPERINCH = 19.582 //For the Practice Robot
 //    private double knownDirection;
+//    1.111
     
     private Chassis()
     {

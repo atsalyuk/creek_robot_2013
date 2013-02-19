@@ -26,7 +26,7 @@ public class Driver
     private static final double ZMAX = 1.0;
     private static final double ROTMIN = -0.734 - ROTCENTER;
     private static final double ROTMAX = 0.882 - ROTCENTER;
-    private static final double XEXPO = 0.2;
+    private static final double XEXPO = 0.8;
     private static final double YEXPO = 0.4;
     private static final double ROTEXPO = 0.0;
     private static final double XSCALE = 1.3;
@@ -56,20 +56,20 @@ public class Driver
     {
         if ( xAxis )
         {
-            maxSpeed = XMAX;
-            minSpeed = XMIN;
+            maxSpeed = 0.60;
+            minSpeed = -0.60;
         }
         else
         {
             if ( joy.getRawButton( 2 ) )
             {
-                maxSpeed = 0.75;
-                minSpeed = -0.75;
+                maxSpeed = 0.95;
+                minSpeed = -0.95;
             }
             else
             {
-                maxSpeed = 0.4;
-                minSpeed = -0.4;
+                maxSpeed = 0.55;
+                minSpeed = -0.55;
             }
         }
 
