@@ -30,8 +30,8 @@ public class Driver
     private static final double YEXPO = 0.4;
     private static final double ROTEXPO = 0.0;
     private static final double XSCALE = 1.3;
-    private static double maxSpeed = 1.0;
-    private static double minSpeed = -1.0;
+    private static double maxSpeed = 0.95;
+    private static double minSpeed = -0.95;
     //Left hand y-axis max 0.843
     //left hand y-axis min -0.406
     //Left switch facing away: false
@@ -54,6 +54,7 @@ public class Driver
 
     public double reduceSpeed( double speed, boolean xAxis )
     {
+      /*  
         if ( xAxis )
         {
             maxSpeed = 0.60;
@@ -72,6 +73,7 @@ public class Driver
                 minSpeed = -0.55;
             }
         }
+      */
 
         if ( speed < minSpeed )
         {

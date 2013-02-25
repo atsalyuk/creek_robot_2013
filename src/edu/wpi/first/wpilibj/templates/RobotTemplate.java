@@ -111,14 +111,7 @@ public class RobotTemplate extends SimpleRobot
             // Drive it
             chassis.drive( driver.getX(), driver.getY() );
             chassis.printValues();
-            if( driver.getRightSwitch() )
-            {
-                mechanism.driveArm( driver.getRot() );
-            }
-            else
-            {
-                mechanism.moveArm( driver.getRedButton(), driver.getBlackButton() );
-            }
+            mechanism.moveArm( driver.getRedButton(), driver.getBlackButton() );
 
         }
     }

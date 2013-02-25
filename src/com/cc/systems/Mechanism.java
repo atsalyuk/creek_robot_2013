@@ -19,7 +19,7 @@ public class Mechanism
 {
 
     private static Mechanism INSTANCE = null;
-    ;
+
     private int armState = 0;
     CCTalon armMotor = null;
 //    CCVictor armMotor = null;
