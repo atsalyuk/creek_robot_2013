@@ -21,22 +21,18 @@ public class Chassis
 {
 
     private static Chassis INSTANCE = null;
-//    CCVictor leftMotor1 = null;
-//    CCVictor rightMotor1 = null;
     CCTalon leftMotor1 = null;
     CCTalon rightMotor1 = null;
     Encoder encoder = null;
     Gyro gyro = null;
 //    FixDirection fixdirect7
     private final static double TICKSPERINCH = 15.43; //For the Competition Robot
-//    private final static double TICKSPERINCH = 19.582 //For the Practice Robot
+    private final static double FRONTTOBACK = 1.288;
 //    private double knownDirection;
 //    1.111
-    
+
     private Chassis()
     {
-//        leftMotor1 = new CCVictor( 9, true );
-//        rightMotor1 = new CCVictor( 10, false );
         leftMotor1 = new CCTalon( 4, false );
         rightMotor1 = new CCTalon( 3, true );
         encoder = new Encoder( 13, 14 );
@@ -56,10 +52,10 @@ public class Chassis
 
     public void drive( double xVal, double yVal )
     {
-        
+
         double tmpLeft = yVal;
 
-        tmpLeft += xVal;// * -1.0;
+        tmpLeft += xVal;// * -1.0;      
         tmpLeft = normalize( tmpLeft );
 
         leftMotor1.set( tmpLeft );
@@ -70,9 +66,10 @@ public class Chassis
         tmpRight = normalize( tmpRight );
 
         rightMotor1.set( tmpRight );
-        
-        System.out.println( "x: " + xVal + "  y: " + yVal + "  left: " + tmpLeft + "   rgt: " + tmpRight );
-        Timer.delay( 0.5 );
+
+//        System.out.println( "x: " + xVal + "  y: " + yVal + "  left: " + tmpLeft + "   rgt: " + tmpRight );
+//        System.out.println( "left: " + leftMotor1.get() + " right: " + rightMotor1.get());
+//        Timer.delay( 0.5 );
     }
 
     private double normalize( double val )
@@ -93,8 +90,8 @@ public class Chassis
 
     public void stop()
     {
-        leftMotor1.set( 0.0 );
-        rightMotor1.set( 0.0 );
+        leftMotor1.stopMotor();
+        rightMotor1.stopMotor();
     }
 
     /*
@@ -128,8 +125,8 @@ public class Chassis
         while ( Math.abs( encoder.get() ) < ticksToTravel )
         {
             this.drive( 0.0, speed );
-            Timer.delay( 0.05);
-//            System.out.println( "Encoder: " + encoder.get() );
+            Timer.delay( 0.05 );
+            System.out.println( "Encoder: " + encoder.get() );
         }
 
         this.stop();
@@ -140,7 +137,7 @@ public class Chassis
 
     public void turnAngle( double angleToTurn, double speed )
     {
-        
+
         while ( Math.abs( gyro.getAngle() ) < angleToTurn )
         {
             this.drive( speed, 0.0 );
@@ -151,12 +148,10 @@ public class Chassis
         System.out.println( "Angle of Robot: " + gyro.getAngle() );
 
 //        knownDirection=angleToTurn; //setting angle that angle from the gyro will be compared against when robot is movieng in a strait line
-        
+
         gyro.reset();
     }
-  
-   
-    
+
     public void driveSonar( double speed, double distanceToTravel, boolean useFeet )
     {
         double ticksToTravel;
@@ -182,7 +177,7 @@ public class Chassis
         encoder.stop();
         encoder.reset();
     }
-    
+
     public void printValues()
     {
         System.out.println( "Gyro: " + gyro.getAngle() + " Encoder: " + encoder.get() );

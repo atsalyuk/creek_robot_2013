@@ -6,16 +6,20 @@
 /*----------------------------------------------------------------------------*/
 package edu.wpi.first.wpilibj.templates;
 
+import com.cc.autonomous.AutoCenter;
+import com.cc.autonomous.AutoCommand;
+import com.cc.autonomous.AutoLeft;
+import com.cc.autonomous.AutoRight;
+import com.cc.autonomous.DoNothing;
 import com.cc.inputs.digitalInputs.Sonar;
 import com.cc.inputs.driver.Driver;
 import com.cc.systems.Chassis;
 import com.cc.systems.Mechanism;
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.DriverStationLCD;
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SimpleRobot;
-import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -33,8 +37,12 @@ public class RobotTemplate extends SimpleRobot
     DigitalInput switchOne;
     DigitalInput switchTwo;
     Sonar sonar;
-//    Encoder encoder;
-//    DriverStationLCD driverLCD;
+    SendableChooser autoChooser;
+    AutoCenter autoCenter;
+    AutoLeft autoLeft;
+    AutoRight autoRight;
+    DoNothing doNothing;
+    
     
     protected void robotInit()
     {
@@ -45,13 +53,24 @@ public class RobotTemplate extends SimpleRobot
         mechanism = Mechanism.getInstance();
         switchOne = new DigitalInput( 1 );
         switchTwo = new DigitalInput( 2 );
-        sonar = new Sonar( 3, 4);
+        sonar = new Sonar( 7, 6);
 //        encoder = new Encoder( 13, 14 );
         
 //        driver station hello world code
 //          driverLCD=DriverStationLCD.getInstance();
 //          driverLCD.println(DriverStationLCD.Line.kUser1,0,"hello word, dirver lcd test");
         //end of hello world
+        autoCenter = new AutoCenter();
+        autoLeft = new AutoLeft();
+        autoRight = new AutoRight();
+        doNothing = new DoNothing();
+        
+        autoChooser = new SendableChooser();
+        autoChooser.addDefault( "Left Side", autoLeft);
+        autoChooser.addObject( "Center", autoCenter);
+        autoChooser.addObject( "Right Side", autoRight);
+        autoChooser.addObject( "Do Nothing", doNothing);
+        SmartDashboard.putData( "Auto Chooser", autoChooser);
         
     }
 
@@ -65,16 +84,16 @@ public class RobotTemplate extends SimpleRobot
      */
     public void autonomous()
     {
-        boolean sOne = switchOne.get();
-        boolean sTwo = switchTwo.get();
+        AutoCommand command = (AutoCommand)autoChooser.getSelected();
+        command.doAuto();
 
-        if ( sOne || sTwo )
-        {
-//            chassis.driveDistance( 2.4, -0.45, true );
-//            Timer.delay( 0.25 );
-//            chassis.turnAngle( 82, 0.60 );
-//            Timer.delay( 0.25 );
-//            if ( sOne && !sTwo )
+//        if ( sOne || sTwo )
+//        {
+////            chassis.driveDistance( 2.4, -0.45, true );
+////            Timer.delay( 0.25 );
+////            chassis.turnAngle( 82, 0.60 );
+////            Timer.delay( 0.25 );
+////            if ( sOne && !sTwo )
 //            {
 //                chassis.driveDistance( 3.3, 0.55, true );
 //            }
@@ -87,22 +106,22 @@ public class RobotTemplate extends SimpleRobot
 //                chassis.driveDistance( 14.12, 0.55, true );
 //            }
 //            Timer.delay( 0.25 );
-//            chassis.turnAngle( 95, -0.60 );
+//            chassis.turnAngle( 74, -0.60 );
 //            Timer.delay( 0.25 );
 //            chassis.driveDistance( 16.85, 0.55, true );
 //            Timer.delay( 0.25 );
-//            chassis.turnAngle( 58.055555555, 0.6 );
+//            chassis.turnAngle( 35.055555555, 0.6 );
 //            Timer.delay( 0.25 );
 //            chassis.driveDistance( 5.62, 0.55, true );
 //            Timer.delay( 0.25 );
-
-        }
+//
+//        }
     }
 
     /**
      * This function is called once each time the robot enters operator control.
      */
-    public void operatorControl()
+    public void operatorControl()  
     {
         System.out.println( "In operatorControl()" );
 
@@ -128,23 +147,11 @@ public class RobotTemplate extends SimpleRobot
      */
     public void test()
     {
-        System.out.println( "In test" );
+//        System.out.println( "In test" );
 
 //        while ( isEnabled() )
         {
-//            System.out.println( sonar.calibrate() );
-            
-            chassis.turnAngle( 90, 0.45 );
-            
-            
-//            encoder.start();
-//            chassis.drive( 0.0, 0.35);
-//            Timer.delay( 5.0 );
-//            chassis.stop();
-//            System.out.println( "Encoder: " + encoder.get() );
-//            encoder.stop();
-//            encoder.reset();
-
+        chassis.driveDistance( 10, 0.35, true );
         }
 
     }

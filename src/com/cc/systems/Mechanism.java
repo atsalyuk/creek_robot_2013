@@ -22,12 +22,10 @@ public class Mechanism
     ;
     private int armState = 0;
     CCTalon armMotor = null;
-//    CCVictor armMotor = null;
 
     private Mechanism()
     {
         armMotor = new CCTalon( 1, false );
-//        armMotor = new CCVictor ( 1, false );
 
     }
 

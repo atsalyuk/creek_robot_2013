@@ -63,8 +63,8 @@ public class Driver
         {
             if ( joy.getRawButton( 2 ) )
             {
-                maxSpeed = 0.95;
-                minSpeed = -0.95;
+                maxSpeed = 1.0;
+                minSpeed = -1.0;
             }
             else
             {
@@ -175,16 +175,6 @@ public class Driver
         System.out.print( " " + str + ":" + val );
     }
 
-    public boolean getLeftFrontSw()
-    {
-        return joy.getRawButton( 2 );
-    }
-
-    public boolean getRightFrontSw()
-    {
-        return joy.getRawButton( 3 );
-    }
-
     public void getRawButton()
     {
         for ( int i = 1; i <= 12; i++ )
@@ -215,7 +205,7 @@ public class Driver
         return joy.getRawButton( 2 );
     }
 
-    public boolean getRightSwitch()
+    public boolean getRightSwitch() //returns true is right switch towards driver
     {
         return joy.getRawButton( 3 );
     }
