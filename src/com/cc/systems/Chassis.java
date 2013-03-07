@@ -36,7 +36,6 @@ public class Chassis
         rightMotor1 = new CCTalon( 3, true );
         encoder = new Encoder( 13, 14 );
         gyro = new Gyro( 1 );
-//        fixdirect=new FixDirection(gyro);
     }
 
     public static Chassis getInstance()
