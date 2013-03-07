@@ -25,12 +25,11 @@ public class Chassis
     CCTalon rightMotor1 = null;
     Encoder encoder = null;
     Gyro gyro = null;
-//    FixDirection fixdirect7
+
     private final static double TICKSPERINCH = 15.43; //For the Competition Robot
     private final static double FRONTTOBACK = 1.288;
-//    private double knownDirection;
-//    1.111
-
+    
+    
     private Chassis()
     {
         leftMotor1 = new CCTalon( 4, false );
