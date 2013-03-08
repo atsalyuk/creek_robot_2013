@@ -42,20 +42,19 @@ public class RobotTemplate extends SimpleRobot
     AutoLeft autoLeft;
     AutoRight autoRight;
     DoNothing doNothing;
-    
-    
+
     protected void robotInit()
     {
         super.robotInit();
-        
+
         driver = Driver.getInstance();
         chassis = Chassis.getInstance();
         mechanism = Mechanism.getInstance();
-        switchOne = new DigitalInput( 1 );
-        switchTwo = new DigitalInput( 2 );
-        sonar = new Sonar( 7, 6);
+        switchOne = new DigitalInput(1);
+        switchTwo = new DigitalInput(2);
+        sonar = new Sonar(7, 6);
 //        encoder = new Encoder( 13, 14 );
-        
+
 //        driver station hello world code
 //          driverLCD=DriverStationLCD.getInstance();
 //          driverLCD.println(DriverStationLCD.Line.kUser1,0,"hello word, dirver lcd test");
@@ -64,14 +63,14 @@ public class RobotTemplate extends SimpleRobot
         autoLeft = new AutoLeft();
         autoRight = new AutoRight();
         doNothing = new DoNothing();
-        
+
         autoChooser = new SendableChooser();
-        autoChooser.addDefault( "Left Side", autoLeft);
-        autoChooser.addObject( "Center", autoCenter);
-        autoChooser.addObject( "Right Side", autoRight);
-        autoChooser.addObject( "Do Nothing", doNothing);
-        SmartDashboard.putData( "Auto Chooser", autoChooser);
-        
+        autoChooser.addDefault("Left Side", autoLeft);
+        autoChooser.addObject("Center", autoCenter);
+        autoChooser.addObject("Right Side", autoRight);
+        autoChooser.addObject("Do Nothing", doNothing);
+        SmartDashboard.putData("Auto Chooser", autoChooser);
+
     }
 
     protected void disabled()
@@ -82,9 +81,8 @@ public class RobotTemplate extends SimpleRobot
     /**
      * This function is called once each time the robot enters autonomous mode.
      */
-    public void autonomous()
-    {
-        AutoCommand command = (AutoCommand)autoChooser.getSelected();
+    public void autonomous() {
+        AutoCommand command = (AutoCommand) autoChooser.getSelected();
         command.doAuto();
 
 //        if ( sOne || sTwo )
@@ -121,32 +119,37 @@ public class RobotTemplate extends SimpleRobot
     /**
      * This function is called once each time the robot enters operator control.
      */
-    public void operatorControl()  
-    {
-        System.out.println( "In operatorControl()" );
+    public void operatorControl() {
+        System.out.println("In operatorControl()");
 
-        while ( isEnabled() )
+        while (isEnabled())
         {
             // Drive it
-            chassis.drive( driver.getX(), driver.getY() );
-            chassis.printValues();
-            mechanism.moveArm( driver.getRedButton(), driver.getBlackButton() );
-
+            chassis.drive(driver.getX(), driver.getY());
+//            chassis.printValues();
+            if (driver.getRightSwitch())
+            {
+                mechanism.driveArm(driver.getRot());
+            } 
+            else
+            {
+                mechanism.moveArm( driver.getRedButton(), driver.getBlackButton() );
+            }
+            
         }
     }
 
     /**
      * This function is called once each time the robot enters test mode.
      */
-    public void test()
-    {
+    public void test() {
 //        System.out.println( "In test" );
 
 //        while ( isEnabled() )
         {
-        
-        chassis.turnAngle( 90, 0.6);
-        
+
+            chassis.turnAngle(90, 0.6);
+
         }
     }
 }
