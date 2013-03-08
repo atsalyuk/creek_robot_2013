@@ -144,8 +144,9 @@ public class RobotTemplate extends SimpleRobot
 
 //        while ( isEnabled() )
         {
-        chassis.driveDistance( 10, 0.35, true );
+        
+        chassis.turnAngle( 90, 0.6);
+        
         }
-
     }
 }

@@ -27,7 +27,8 @@ public class Chassis
     Gyro gyro = null;
 
     private final static double TICKSPERINCH = 15.43; //For the Competition Robot
-    private final static double FRONTTOBACK = 1.288;
+    private final static double Kp = 0.30;
+   
     
     
     private Chassis()
@@ -119,12 +120,15 @@ public class Chassis
         }
 
         encoder.start();
+        gyro.reset();
 
         while ( Math.abs( encoder.get() ) < ticksToTravel )
         {
-            this.drive( 0.0, speed );
+            double angle = gyro.getAngle();
+            
+            this.drive( -angle * Kp, speed );
             Timer.delay( 0.05 );
-            System.out.println( "Encoder: " + encoder.get() );
+//            System.out.println( "Encoder: " + encoder.get() );
         }
 
         this.stop();
@@ -133,19 +137,64 @@ public class Chassis
         encoder.reset();
     }
 
+    private double maxNormalize( double val, double max )
+    {
+        if ( val < -max )
+        {
+            return -max;
+        }
+        else if ( val > max )
+        {
+            return max;
+        }
+        else
+        {
+            return val;
+        }
+    }
+    
     public void turnAngle( double angleToTurn, double speed )
     {
-
-        while ( Math.abs( gyro.getAngle() ) < angleToTurn )
+        boolean done = false;
+        double tKp = 0.025;
+        double Ki = 0.002;
+        double errorSum = 0.0;
+        Timer timer = new Timer();
+        
+        gyro.reset();
+        timer.start();
+        
+        while (!done)
         {
-            this.drive( speed, 0.0 );
+            double error = angleToTurn - gyro.getAngle();
+            
+            errorSum += error;
+            
+            double xSpeed = maxNormalize( error * tKp /*+ errorSum * Ki*/ , speed );
+            
+            this.drive( xSpeed , 0.0);
+            
+//            if ( Math.abs( xSpeed ) < 0.10 && Math.abs( error ) < 1.0 )
+//            {
+//                done = true;
+//            }
+            if (timer.get() > 5)
+                done = true;
+
+            System.out.println("Timer: " + timer.get());
+//            System.out.println( "Speed: " + xSpeed + " Error: " + error);
+            Timer.delay( 0.1 );
         }
 
+        timer.stop();
+        
+//        while ( Math.abs( gyro.getAngle() ) < angleToTurn )
+//        {
+//            this.drive( speed, 0.0 );
+//        }
 
         this.stop();
         System.out.println( "Angle of Robot: " + gyro.getAngle() );
-
-//        knownDirection=angleToTurn; //setting angle that angle from the gyro will be compared against when robot is movieng in a strait line
 
         gyro.reset();
     }
