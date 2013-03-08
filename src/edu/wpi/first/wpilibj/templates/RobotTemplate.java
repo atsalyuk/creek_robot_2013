@@ -34,8 +34,8 @@ public class RobotTemplate extends SimpleRobot
     Chassis chassis = null;
     Mechanism mechanism = null;
     Driver driver = null;
-    DigitalInput switchOne;
-    DigitalInput switchTwo;
+//    DigitalInput switchOne;
+//    DigitalInput switchTwo;
     Sonar sonar;
     SendableChooser autoChooser;
     AutoCenter autoCenter;
@@ -50,20 +50,14 @@ public class RobotTemplate extends SimpleRobot
         driver = Driver.getInstance();
         chassis = Chassis.getInstance();
         mechanism = Mechanism.getInstance();
-        switchOne = new DigitalInput(1);
-        switchTwo = new DigitalInput(2);
+//        switchOne = new DigitalInput(1);
+//        switchTwo = new DigitalInput(2);
         sonar = new Sonar(7, 6);
 //        encoder = new Encoder( 13, 14 );
-
-//        driver station hello world code
-//          driverLCD=DriverStationLCD.getInstance();
-//          driverLCD.println(DriverStationLCD.Line.kUser1,0,"hello word, dirver lcd test");
-        //end of hello world
         autoCenter = new AutoCenter();
         autoLeft = new AutoLeft();
         autoRight = new AutoRight();
         doNothing = new DoNothing();
-
         autoChooser = new SendableChooser();
         autoChooser.addDefault("Left Side", autoLeft);
         autoChooser.addObject("Center", autoCenter);
@@ -81,7 +75,8 @@ public class RobotTemplate extends SimpleRobot
     /**
      * This function is called once each time the robot enters autonomous mode.
      */
-    public void autonomous() {
+    public void autonomous()
+    {
         AutoCommand command = (AutoCommand) autoChooser.getSelected();
         command.doAuto();
 
@@ -142,14 +137,12 @@ public class RobotTemplate extends SimpleRobot
     /**
      * This function is called once each time the robot enters test mode.
      */
-    public void test() {
+    public void test()
+    {
 //        System.out.println( "In test" );
-
 //        while ( isEnabled() )
         {
-
             chassis.turnAngle(90, 0.6);
-
         }
     }
 }

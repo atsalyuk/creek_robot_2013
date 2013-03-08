@@ -6,7 +6,7 @@ package com.cc.autonomous;
 
 /**
  *
- * @author TestingMachine
+ * @author Adam
  */
 public class AutoRight extends AutoCommand
 {

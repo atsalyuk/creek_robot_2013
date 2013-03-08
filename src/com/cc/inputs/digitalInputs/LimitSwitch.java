@@ -17,14 +17,12 @@ public class LimitSwitch
     
     public LimitSwitch(int channel)
     {
-        di = new DigitalInput(channel);
-        
+        di = new DigitalInput(channel);      
     }
     
     public boolean get()
     {
-     return di.get();   
-        
+     return di.get();          
     }
     
 }

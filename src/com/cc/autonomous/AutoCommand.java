@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.Timer;
 
 /**
  *
- * @author TestingMachine
+ * @author Adam
  */
 public abstract class AutoCommand
 {

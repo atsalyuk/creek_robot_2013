@@ -54,7 +54,7 @@ public class Driver
 
     public double reduceSpeed( double speed, boolean xAxis )
     {
-      /*  
+ 
         if ( xAxis )
         {
             maxSpeed = 0.60;
@@ -73,7 +73,6 @@ public class Driver
                 minSpeed = -0.55;
             }
         }
-      */
 
         if ( speed < minSpeed )
         {
