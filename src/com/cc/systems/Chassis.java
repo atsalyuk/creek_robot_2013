@@ -150,37 +150,44 @@ public class Chassis
 //    public void turnAngle( double angleToTurn, double speed )
 //    {
 //        boolean done = false;
-//        double tKp = 0.025;
+//        double Kp = 0.065;
 //        double Ki = 0.002;
+//        double Kd = 0.1;
+//        double error = 0.0;
 //        double errorSum = 0.0;
-//        Timer timer = new Timer();
+//        double prevError = 0.0;
+////        Timer timer = new Timer();
 //
 //        gyro.reset();
-//        timer.start();
+////        timer.start();
 //
 //        while (!done)
 //        {
-//            double error = angleToTurn - gyro.getAngle();
+//            prevError = error;          
+//            error = angleToTurn - gyro.getAngle();
+////            errorSum += error;
+//            double pOut = error * Kp;
+//            double dOut = (error-prevError)*Kd;
 //
-//            errorSum += error;
-//
-//            double xSpeed = maxNormalize( error * tKp /*+ errorSum * Ki*/ , speed );
+//            double xSpeed = maxNormalize( pOut /*+ errorSum * Ki*/ + dOut , speed );
 //
 //            this.drive( xSpeed , 0.0);
 //
-////            if ( Math.abs( xSpeed ) < 0.10 && Math.abs( error ) < 1.0 )
+//            if ( Math.abs( error ) < 0.1 )
+//            {
+//                done = true;
+//            }
+//            
+////            if (timer.get() > 5)
 ////            {
 ////                done = true;
 ////            }
-//            if (timer.get() > 5)
-//                done = true;
-//
-//            System.out.println("Timer: " + timer.get());
-////            System.out.println( "Speed: " + xSpeed + " Error: " + error);
-//            Timer.delay( 0.1 );
+//            
+//            System.out.println( "Gyro: " + gyro.getAngle() + "  Error: " + error + "  pOut: " + pOut + "dOut: " + dOut );
+////            Timer.delay( 0.1 );
 //        }
 //
-//        timer.stop();
+////        timer.stop();
 //
 ////        while ( Math.abs( gyro.getAngle() ) < angleToTurn )
 ////        {
@@ -195,10 +202,12 @@ public class Chassis
     public void turnAngle( double angleToTurn, double speed )
     {
         boolean done = false;
-        double kP = 0.025;
-        double kD = 0.01;
+        double kP = 3.0;
+        double kD = 0.0;    //2.0;
+        double kI = 0.15;    //0.15;
         double error = 0.0;
         double prevError = 0.0;
+        double errorSum = 0.0;
 
         gyro.reset();
 
@@ -207,21 +216,28 @@ public class Chassis
             prevError = error;
             error = normalize( (angleToTurn - gyro.getAngle()) / 100.0 );
 
+            errorSum += error;
+            errorSum = maxNormalize( errorSum, 5 );
+            
             double p = error * kP;
             double d = (error - prevError) * kD;
+            double i = errorSum * kI;
 
-            this.drive( p + d, 0.0 );
+            this.drive( maxNormalize(p + i + d, speed) , 0.0 );
 
-            if ( Math.abs( error ) < 0.01 )
+            if ( Math.abs( errorSum ) < 0.01 )
             {
                 done = true;
             }
 
-            System.out.println( "Gyro: " + gyro.getAngle() );
-            Timer.delay( 0.05 );
+//            System.out.println( "Gyro: " + gyro.getAngle() + " errorSum: " + errorSum + " error: " + error);
+//            Timer.delay( 0.05 );
         }
-
+            System.out.println( "Gyro: " + gyro.getAngle() + " errorSum: " + errorSum + " error: " + error);
+        System.out.println("Out of loop");
         this.stop(); 
+        done = false;
+        gyro.reset();
     }
 
     public void driveSonar( double speed, double distanceToTravel, boolean useFeet )

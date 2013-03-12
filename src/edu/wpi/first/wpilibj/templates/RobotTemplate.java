@@ -119,7 +119,6 @@ public class RobotTemplate extends SimpleRobot
 
         while (isEnabled())
         {
-            // Drive it
             chassis.drive(driver.getX(), driver.getY());
 //            chassis.printValues();
             if (driver.getRightSwitch())
@@ -130,7 +129,6 @@ public class RobotTemplate extends SimpleRobot
             {
                 mechanism.moveArm( driver.getRedButton(), driver.getBlackButton() );
             }
-            
         }
     }
 
