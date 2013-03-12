@@ -195,8 +195,8 @@ public class Chassis
     public void turnAngle( double angleToTurn, double speed )
     {
         boolean done = false;
-        double kP = 0.025;
-        double kD = 0.01;
+        double kP = 0.7;
+        double kD = 0.2;
         double error = 0.0;
         double prevError = 0.0;
 
@@ -217,10 +217,11 @@ public class Chassis
                 done = true;
             }
 
+            System.out.println( "Gyro: " + gyro.getAngle() );
             Timer.delay( 0.05 );
         }
 
-        this.stop();
+        this.stop(); 
     }
 
     public void driveSonar( double speed, double distanceToTravel, boolean useFeet )

@@ -139,10 +139,10 @@ public class RobotTemplate extends SimpleRobot
      */
     public void test()
     {
-//        System.out.println( "In test" );
+        System.out.println( "In test" );
 //        while ( isEnabled() )
         {
-            chassis.turnAngle(90, 0.6);
+            chassis.turnAngle( 90, 0.6);
         }
     }
 }
