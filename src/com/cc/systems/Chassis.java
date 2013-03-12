@@ -195,8 +195,8 @@ public class Chassis
     public void turnAngle( double angleToTurn, double speed )
     {
         boolean done = false;
-        double kP = 0.7;
-        double kD = 0.2;
+        double kP = 0.025;
+        double kD = 0.01;
         double error = 0.0;
         double prevError = 0.0;
 

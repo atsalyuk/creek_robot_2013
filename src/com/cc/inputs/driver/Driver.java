@@ -57,8 +57,8 @@ public class Driver
  
         if ( xAxis )
         {
-            maxSpeed = 0.60;
-            minSpeed = -0.60;
+            maxSpeed = 1.0;
+            minSpeed = -1.0;
         }
         else
         {
