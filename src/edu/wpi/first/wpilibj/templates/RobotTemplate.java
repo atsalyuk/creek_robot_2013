@@ -140,7 +140,8 @@ public class RobotTemplate extends SimpleRobot
         System.out.println( "In test" );
 //        while ( isEnabled() )
         {
-            chassis.turnAngle( 90, 0.6);
+//            chassis.turnAngle( 90, 0.7);
+            chassis.driveDistance( 7, 0.6, true);
         }
     }
 }

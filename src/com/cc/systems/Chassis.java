@@ -124,6 +124,7 @@ public class Chassis
             Timer.delay( 0.05 );
 //            System.out.println( "Encoder: " + encoder.get() );
         }
+        //Set speed at 0.59 to be around desired distance
 
         this.stop();
 
@@ -202,9 +203,10 @@ public class Chassis
     public void turnAngle( double angleToTurn, double speed )
     {
         boolean done = false;
-        double kP = 3.0;
-        double kD = 0.0;    //2.0;
-        double kI = 0.15;    //0.15;
+                             // Speed at .75;  .7;    .65;   .6;  
+        double kP = 1.0;     // kP = 1.0;      1.0;   1.0;   1.0;
+        double kI = 0.06;    // kI = .05;      .06;   .07;   .10;
+        double kD = 0.11;    // kD = .08;      .11;   .14;   .16;
         double error = 0.0;
         double prevError = 0.0;
         double errorSum = 0.0;
@@ -214,14 +216,13 @@ public class Chassis
         while ( !done )
         {
             prevError = error;
-            error = normalize( (angleToTurn - gyro.getAngle()) / 100.0 );
-
+            error = normalize( (angleToTurn - gyro.getAngle() ) / 100.0 );
             errorSum += error;
             errorSum = maxNormalize( errorSum, 5 );
             
             double p = error * kP;
-            double d = (error - prevError) * kD;
             double i = errorSum * kI;
+            double d = (error - prevError) * kD;       
 
             this.drive( maxNormalize(p + i + d, speed) , 0.0 );
 
@@ -233,8 +234,10 @@ public class Chassis
 //            System.out.println( "Gyro: " + gyro.getAngle() + " errorSum: " + errorSum + " error: " + error);
 //            Timer.delay( 0.05 );
         }
-            System.out.println( "Gyro: " + gyro.getAngle() + " errorSum: " + errorSum + " error: " + error);
-        System.out.println("Out of loop");
+        
+        System.out.println( "Gyro: " + gyro.getAngle() + " errorSum: " + errorSum + " error: " + error);
+//        System.out.println("Out of loop");
+        
         this.stop(); 
         done = false;
         gyro.reset();
