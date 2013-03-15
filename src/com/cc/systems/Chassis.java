@@ -23,7 +23,7 @@ public class Chassis
     Encoder encoder = null;
     Gyro gyro = null;
     private final static double TICKSPERINCH = 15.43; //For the Competition Robot
-    private final static double Kp = 0.30;
+    private final static double kP = 0.30;
 
     private Chassis()
     {
@@ -120,7 +120,7 @@ public class Chassis
         {
             double angle = gyro.getAngle();
 
-            this.drive( -angle * Kp, speed );
+            this.drive( -angle * kP, speed );
             Timer.delay( 0.05 );
 //            System.out.println( "Encoder: " + encoder.get() );
         }
@@ -148,83 +148,64 @@ public class Chassis
         }
     }
 
-//    public void turnAngle( double angleToTurn, double speed )
-//    {
-//        boolean done = false;
-//        double Kp = 0.065;
-//        double Ki = 0.002;
-//        double Kd = 0.1;
-//        double error = 0.0;
-//        double errorSum = 0.0;
-//        double prevError = 0.0;
-////        Timer timer = new Timer();
-//
-//        gyro.reset();
-////        timer.start();
-//
-//        while (!done)
-//        {
-//            prevError = error;          
-//            error = angleToTurn - gyro.getAngle();
-////            errorSum += error;
-//            double pOut = error * Kp;
-//            double dOut = (error-prevError)*Kd;
-//
-//            double xSpeed = maxNormalize( pOut /*+ errorSum * Ki*/ + dOut , speed );
-//
-//            this.drive( xSpeed , 0.0);
-//
-//            if ( Math.abs( error ) < 0.1 )
-//            {
-//                done = true;
-//            }
-//            
-////            if (timer.get() > 5)
-////            {
-////                done = true;
-////            }
-//            
-//            System.out.println( "Gyro: " + gyro.getAngle() + "  Error: " + error + "  pOut: " + pOut + "dOut: " + dOut );
-////            Timer.delay( 0.1 );
-//        }
-//
-////        timer.stop();
-//
-////        while ( Math.abs( gyro.getAngle() ) < angleToTurn )
-////        {
-////            this.drive( speed, 0.0 );
-////        }
-//
-//        this.stop();
-//        System.out.println( "Angle of Robot: " + gyro.getAngle() );
-//
-//        gyro.reset();
-//    }
-    public void turnAngle( double angleToTurn, double speed )
+    public void turnAngle( double angleToTurn, int whatSpeed )
     {
         boolean done = false;
-                             // Speed at .75;  .7;    .65;   .6;  
-        double kP = 1.0;     // kP = 1.0;      1.0;   1.0;   1.0;
-        double kI = 0.06;    // kI = .05;      .06;   .07;   .10;
-        double kD = 0.11;    // kD = .08;      .11;   .14;   .16;
+        
+        //Default speed is at 0.7
+        double Kp = 1.0;
+        double Ki = 0.06;
+        double Kd = 0.11;
+        double moveSpeed = 0.7;
         double error = 0.0;
         double prevError = 0.0;
         double errorSum = 0.0;
+        
+        switch( whatSpeed )
+        {
+        case 1:    //Speed: 0.60
+            Kp = 1.0;
+            Ki = 0.1;
+            Kd = 0.16;
+            moveSpeed = 0.6;
+            break;
+            
+        case 2:    //Speed: 0.65
+            Kp = 1.0;
+            Ki = .07;
+            Kd = .14;
+            moveSpeed = 0.65;
+            break;
+            
+        case 3:    //Speed: 0.70
+            Kp = 1.0;
+            Ki = 0.06;
+            Kd = 0.11;
+            moveSpeed = 0.7;
+            break;
+            
+        case 4:    //Speed: 0.75
+            Kp = 1.0;
+            Ki = 0.05;
+            Kd = 0.08;
+            moveSpeed = 0.75;
+            break;
+        }
 
         gyro.reset();
 
         while ( !done )
         {
             prevError = error;
-            error = normalize( (angleToTurn - gyro.getAngle() ) / 100.0 );
+            error = normalize( ( angleToTurn - gyro.getAngle() ) / 100.0 );
             errorSum += error;
             errorSum = maxNormalize( errorSum, 5 );
             
-            double p = error * kP;
-            double i = errorSum * kI;
-            double d = (error - prevError) * kD;       
+            double p = error * Kp;
+            double i = errorSum * Ki;
+            double d = (error - prevError) * Kd;       
 
-            this.drive( maxNormalize(p + i + d, speed) , 0.0 );
+            this.drive( maxNormalize(p + i + d, moveSpeed ) , 0.0 );
 
             if ( Math.abs( errorSum ) < 0.01 )
             {
@@ -235,7 +216,7 @@ public class Chassis
 //            Timer.delay( 0.05 );
         }
         
-        System.out.println( "Gyro: " + gyro.getAngle() + " errorSum: " + errorSum + " error: " + error);
+//        System.out.println( "Gyro: " + gyro.getAngle() + " errorSum: " + errorSum + " error: " + error);
 //        System.out.println("Out of loop");
         
         this.stop(); 
