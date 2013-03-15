@@ -6,18 +6,17 @@ package com.cc.autonomous;
 
 /**
  *
- * @author Adam
+ * @author TestingMachine
  */
-public class AutoLeft extends AutoCommand
+public class AutoBackLeft extends AutoCommand
 {
 
     public void doAuto()
     {
 //        doBackup();
-        
+
         chassis.driveDistance( 14.12, 0.55, true );
-        
+
 //        doCommon();
     }
-    
 }

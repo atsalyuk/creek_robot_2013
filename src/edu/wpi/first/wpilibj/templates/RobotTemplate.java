@@ -8,9 +8,9 @@ package edu.wpi.first.wpilibj.templates;
 
 import com.cc.autonomous.AutoCenter;
 import com.cc.autonomous.AutoCommand;
-import com.cc.autonomous.AutoLeft;
+import com.cc.autonomous.AutoBackLeft;
 import com.cc.autonomous.AutoRight;
-import com.cc.autonomous.DoNothing;
+import com.cc.autonomous.AutoDoNothing;
 import com.cc.inputs.digitalInputs.Sonar;
 import com.cc.inputs.driver.Driver;
 import com.cc.systems.Chassis;
@@ -39,9 +39,9 @@ public class RobotTemplate extends SimpleRobot
     Sonar sonar;
     SendableChooser autoChooser;
     AutoCenter autoCenter;
-    AutoLeft autoLeft;
+    AutoBackLeft autoBackLeft;
     AutoRight autoRight;
-    DoNothing doNothing;
+    AutoDoNothing autoDoNothing;
 
     protected void robotInit()
     {
@@ -55,14 +55,14 @@ public class RobotTemplate extends SimpleRobot
         sonar = new Sonar(7, 6);
 //        encoder = new Encoder( 13, 14 );
         autoCenter = new AutoCenter();
-        autoLeft = new AutoLeft();
+        autoBackLeft = new AutoBackLeft();
         autoRight = new AutoRight();
-        doNothing = new DoNothing();
+        autoDoNothing = new AutoDoNothing();
         autoChooser = new SendableChooser();
-        autoChooser.addDefault("Left Side", autoLeft);
-        autoChooser.addObject("Center", autoCenter);
-        autoChooser.addObject("Right Side", autoRight);
-        autoChooser.addObject("Do Nothing", doNothing);
+        autoChooser.addDefault("Back Left Side", autoBackLeft);
+        autoChooser.addObject("Back Center", autoCenter);
+        autoChooser.addObject("Back Right Side", autoRight);
+        autoChooser.addObject("Do Nothing", autoDoNothing);
         SmartDashboard.putData("Auto Chooser", autoChooser);
 
     }

@@ -6,14 +6,13 @@ package com.cc.autonomous;
 
 /**
  *
- * @author Adam
+ * @author TestingMachine
  */
-public class DoNothing extends AutoCommand
+public class AutoDoNothing extends AutoCommand
 {
 
     public void doAuto()
     {
         //Do Nothing
     }
-    
 }
