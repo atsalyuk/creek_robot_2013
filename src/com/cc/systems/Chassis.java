@@ -23,7 +23,7 @@ public class Chassis
     Encoder encoder = null;
     Gyro gyro = null;
     private final static double TICKSPERINCH = 15.43; //For the Competition Robot
-    private final static double kP = 0.30;
+    private final static double kP = 0.10;
 
     private Chassis()
     {
@@ -179,8 +179,8 @@ public class Chassis
             
         case 3:    //Speed: 0.70
             Kp = 1.0;
-            Ki = 0.06;
-            Kd = 0.11;
+            Ki = 0.059;
+            Kd = 0.16;
             moveSpeed = 0.7;
             break;
             

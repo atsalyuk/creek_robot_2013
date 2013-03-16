@@ -137,10 +137,12 @@ public class RobotTemplate extends SimpleRobot {
      */
     public void test() {
         System.out.println("In test");
-//        while ( isEnabled() )
+        while ( isEnabled() )
         {
-//            chassis.turnAngle( 90, 0.7);
-            chassis.driveDistance(7, 0.6, true);
+//            mechanism.driveArm( 0.8);
+//            Timer.delay( 2 );
+//            mechanism.stopArm();
+        System.out.println( "X Value: " + driver.getX() + " Y Yalue: " + driver.getY() );
         }
     }
 }

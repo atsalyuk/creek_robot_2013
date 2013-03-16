@@ -14,7 +14,7 @@ public class AutoBackLeft extends AutoCommand
 {
     public void doAuto()
     {
-        chassis.driveDistance(156, 0.59, false);
+        chassis.driveDistance(159, 0.59, false);
         Timer.delay(0.5);
         chassis.turnAngle(90, 3);
         Timer.delay(0.5);
@@ -22,7 +22,7 @@ public class AutoBackLeft extends AutoCommand
         Timer.delay(0.5);
         chassis.turnAngle(33.69, 3);
         Timer.delay(0.5);
-        chassis.driveDistance(84, 0.59, false);
+        chassis.driveDistance(90, 0.59, false);
         Timer.delay(0.5);
         
         doArm();
