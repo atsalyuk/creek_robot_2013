@@ -9,8 +9,10 @@ package edu.wpi.first.wpilibj.templates;
 import com.cc.autonomous.AutoCenter;
 import com.cc.autonomous.AutoCommand;
 import com.cc.autonomous.AutoBackLeft;
-import com.cc.autonomous.AutoRight;
+import com.cc.autonomous.AutoBackRight;
 import com.cc.autonomous.AutoDoNothing;
+import com.cc.autonomous.AutoFrontLeft;
+import com.cc.autonomous.AutoFrontRight;
 import com.cc.inputs.digitalInputs.Sonar;
 import com.cc.inputs.driver.Driver;
 import com.cc.systems.Chassis;
@@ -28,8 +30,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * creating this project, you must also update the manifest file in the resource
  * directory.
  */
-public class RobotTemplate extends SimpleRobot
-{
+public class RobotTemplate extends SimpleRobot {
 
     Chassis chassis = null;
     Mechanism mechanism = null;
@@ -40,11 +41,12 @@ public class RobotTemplate extends SimpleRobot
     SendableChooser autoChooser;
     AutoCenter autoCenter;
     AutoBackLeft autoBackLeft;
-    AutoRight autoRight;
+    AutoBackRight autoBackRight;
+    AutoFrontLeft autoFrontLeft;
+    AutoFrontRight autoFrontRight;
     AutoDoNothing autoDoNothing;
 
-    protected void robotInit()
-    {
+    protected void robotInit() {
         super.robotInit();
 
         driver = Driver.getInstance();
@@ -56,27 +58,29 @@ public class RobotTemplate extends SimpleRobot
 //        encoder = new Encoder( 13, 14 );
         autoCenter = new AutoCenter();
         autoBackLeft = new AutoBackLeft();
-        autoRight = new AutoRight();
+        autoBackRight = new AutoBackRight();
+        autoFrontLeft = new AutoFrontLeft();
+        autoFrontRight = new AutoFrontRight();
         autoDoNothing = new AutoDoNothing();
         autoChooser = new SendableChooser();
-        autoChooser.addDefault("Back Left Side", autoBackLeft);
+        autoChooser.addDefault("Back Right Side", autoBackRight);
+        autoChooser.addObject("Back Left Side", autoBackLeft);
+        autoChooser.addObject("Front Right Side", autoFrontRight);
+        autoChooser.addObject("Front Left Side", autoFrontLeft);
         autoChooser.addObject("Back Center", autoCenter);
-        autoChooser.addObject("Back Right Side", autoRight);
         autoChooser.addObject("Do Nothing", autoDoNothing);
         SmartDashboard.putData("Auto Chooser", autoChooser);
 
     }
 
-    protected void disabled()
-    {
+    protected void disabled() {
         super.disabled();
     }
 
     /**
      * This function is called once each time the robot enters autonomous mode.
      */
-    public void autonomous()
-    {
+    public void autonomous() {
         AutoCommand command = (AutoCommand) autoChooser.getSelected();
         command.doAuto();
 
@@ -117,17 +121,13 @@ public class RobotTemplate extends SimpleRobot
     public void operatorControl() {
         System.out.println("In operatorControl()");
 
-        while (isEnabled())
-        {
+        while (isEnabled()) {
             chassis.drive(driver.getX(), driver.getY());
 //            chassis.printValues();
-            if (driver.getRightSwitch())
-            {
+            if (driver.getRightSwitch()) {
                 mechanism.driveArm(driver.getRot());
-            } 
-            else
-            {
-                mechanism.moveArm( driver.getRedButton(), driver.getBlackButton() );
+            } else {
+                mechanism.moveArm(driver.getRedButton(), driver.getBlackButton());
             }
         }
     }
@@ -135,13 +135,12 @@ public class RobotTemplate extends SimpleRobot
     /**
      * This function is called once each time the robot enters test mode.
      */
-    public void test()
-    {
-        System.out.println( "In test" );
+    public void test() {
+        System.out.println("In test");
 //        while ( isEnabled() )
         {
 //            chassis.turnAngle( 90, 0.7);
-            chassis.driveDistance( 7, 0.6, true);
+            chassis.driveDistance(7, 0.6, true);
         }
     }
 }

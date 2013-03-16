@@ -61,7 +61,6 @@ public class Mechanism
                 armState = 2;
                 this.stopArm();
 
-
                 break;
 
             case 2: // Arm Up, Not Moving

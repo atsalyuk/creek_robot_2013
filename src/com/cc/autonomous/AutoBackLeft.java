@@ -4,19 +4,27 @@
  */
 package com.cc.autonomous;
 
+import edu.wpi.first.wpilibj.Timer;
+
 /**
  *
  * @author TestingMachine
  */
 public class AutoBackLeft extends AutoCommand
 {
-
     public void doAuto()
     {
-//        doBackup();
-
-        chassis.driveDistance( 14.12, 0.55, true );
-
-//        doCommon();
+        chassis.driveDistance(156, 0.59, false);
+        Timer.delay(0.5);
+        chassis.turnAngle(90, 3);
+        Timer.delay(0.5);
+        chassis.driveDistance(120, 0.59, false);
+        Timer.delay(0.5);
+        chassis.turnAngle(33.69, 3);
+        Timer.delay(0.5);
+        chassis.driveDistance(84, 0.59, false);
+        Timer.delay(0.5);
+        
+        doArm();
     }
 }
