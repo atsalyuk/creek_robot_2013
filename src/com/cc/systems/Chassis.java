@@ -154,8 +154,8 @@ public class Chassis
         
         //Default speed is at 0.7
         double Kp = 1.0;
-        double Ki = 0.06;
-        double Kd = 0.11;
+        double Ki = 0.07;
+        double Kd = 0.13;
         double moveSpeed = 0.7;
         double error = 0.0;
         double prevError = 0.0;
@@ -179,8 +179,8 @@ public class Chassis
             
         case 3:    //Speed: 0.70
             Kp = 1.0;
-            Ki = 0.059;
-            Kd = 0.16;
+            Ki = 0.06;
+            Kd = 0.18;
             moveSpeed = 0.7;
             break;
             
@@ -207,7 +207,7 @@ public class Chassis
 
             this.drive( maxNormalize(p + i + d, moveSpeed ) , 0.0 );
 
-            if ( Math.abs( errorSum ) < 0.01 )
+            if ( Math.abs( errorSum ) < 0.015 )
             {
                 done = true;
             }
