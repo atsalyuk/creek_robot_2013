@@ -18,6 +18,7 @@ import com.cc.inputs.driver.Driver;
 import com.cc.systems.Chassis;
 import com.cc.systems.Mechanism;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.SimpleRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -38,6 +39,7 @@ public class RobotTemplate extends SimpleRobot {
 //    DigitalInput switchOne;
 //    DigitalInput switchTwo;
     Sonar sonar;
+//    DigitalOutput fans;
     SendableChooser autoChooser;
     AutoCenter autoCenter;
     AutoBackLeft autoBackLeft;
@@ -55,6 +57,8 @@ public class RobotTemplate extends SimpleRobot {
 //        switchOne = new DigitalInput(1);
 //        switchTwo = new DigitalInput(2);
         sonar = new Sonar(7, 6);
+//        fans = new DigitalOutput( 6 );
+//        fans.set( true );
 //        encoder = new Encoder( 13, 14 );
         autoCenter = new AutoCenter();
         autoBackLeft = new AutoBackLeft();

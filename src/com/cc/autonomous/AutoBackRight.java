@@ -16,11 +16,11 @@ public class AutoBackRight extends AutoCommand
     public void doAuto()
     {
 
-        chassis.driveDistance( 159, 0.59, false);
+        chassis.driveDistance( 130, 0.59, false);
         Timer.delay( 0.5 );
         chassis.turnAngle( 56.31, 3 );
         Timer.delay( 0.5 );
-        chassis.driveDistance( 90, 0.59, false);
+        chassis.driveDistance( 84, 0.59, false);
         Timer.delay( 0.5 );
         
         doArm();

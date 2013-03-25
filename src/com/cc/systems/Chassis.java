@@ -153,6 +153,8 @@ public class Chassis
         boolean done = false;
         
         //Default speed is at 0.7
+        long maxTime = 3000;//3 seconds
+        double time = 0.0;
         double Kp = 1.0;
         double Ki = 0.07;
         double Kd = 0.13;
@@ -178,9 +180,9 @@ public class Chassis
             break;
             
         case 3:    //Speed: 0.70
-            Kp = 1.0;
-            Ki = 0.06;
-            Kd = 0.18;
+            Kp = 0.94;
+            Ki = 0.07;
+            Kd = 0.20;
             moveSpeed = 0.7;
             break;
             
@@ -193,9 +195,11 @@ public class Chassis
         }
 
         gyro.reset();
+        
+        time = System.currentTimeMillis();
 
         while ( !done )
-        {
+        {                    
             prevError = error;
             error = normalize( ( angleToTurn - gyro.getAngle() ) / 100.0 );
             errorSum += error;
@@ -207,7 +211,7 @@ public class Chassis
 
             this.drive( maxNormalize(p + i + d, moveSpeed ) , 0.0 );
 
-            if ( Math.abs( errorSum ) < 0.015 )
+            if ( (Math.abs( errorSum ) < 0.01) || (System.currentTimeMillis() > time+maxTime) )
             {
                 done = true;
             }
