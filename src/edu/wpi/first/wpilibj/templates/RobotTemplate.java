@@ -41,7 +41,7 @@ public class RobotTemplate extends SimpleRobot {
     Sonar sonar;
 //    DigitalOutput fans;
     SendableChooser autoChooser;
-    AutoCenter autoCenter;
+//    AutoCenter autoCenter;
     AutoBackLeft autoBackLeft;
     AutoBackRight autoBackRight;
     AutoFrontLeft autoFrontLeft;
@@ -60,7 +60,7 @@ public class RobotTemplate extends SimpleRobot {
 //        fans = new DigitalOutput( 6 );
 //        fans.set( true );
 //        encoder = new Encoder( 13, 14 );
-        autoCenter = new AutoCenter();
+//        autoCenter = new AutoCenter();
         autoBackLeft = new AutoBackLeft();
         autoBackRight = new AutoBackRight();
         autoFrontLeft = new AutoFrontLeft();
@@ -71,7 +71,7 @@ public class RobotTemplate extends SimpleRobot {
         autoChooser.addObject("Back Left Side", autoBackLeft);
         autoChooser.addObject("Front Right Side", autoFrontRight);
         autoChooser.addObject("Front Left Side", autoFrontLeft);
-        autoChooser.addObject("Back Center", autoCenter);
+//        autoChooser.addObject("Back Center", autoCenter);
         autoChooser.addObject("Do Nothing", autoDoNothing);
         SmartDashboard.putData("Auto Chooser", autoChooser);
 
@@ -141,12 +141,10 @@ public class RobotTemplate extends SimpleRobot {
      */
     public void test() {
         System.out.println("In test");
-        while ( isEnabled() )
+//        while ( isEnabled() )
         {
-//            mechanism.driveArm( 0.8);
-//            Timer.delay( 2 );
-//            mechanism.stopArm();
-        System.out.println( "X Value: " + driver.getX() + " Y Yalue: " + driver.getY() );
+            chassis.turnAngle( 90, 3 );
+            System.out.println( "DONE" );
         }
     }
 }

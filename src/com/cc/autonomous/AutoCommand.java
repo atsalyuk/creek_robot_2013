@@ -49,12 +49,12 @@ public abstract class AutoCommand
     
     public void doArm()
     {
-        mechanism.driveArm( -0.5 );
-        Timer.delay( 3 );
+        mechanism.driveArm( 0.640 );
+        Timer.delay( 0.55 );
         mechanism.stopArm();
         Timer.delay( 0.2 );
-        mechanism.driveArm( 0.8 );
-        Timer.delay( 3 );
+        mechanism.driveArm( -0.25 );
+        Timer.delay( 1 );
         mechanism.stopArm();
     }
 }

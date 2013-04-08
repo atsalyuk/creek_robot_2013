@@ -153,7 +153,7 @@ public class Chassis
         boolean done = false;
         
         //Default speed is at 0.7
-        long maxTime = 3000;//3 seconds
+        long maxTime = 4000;//3 seconds
         double time = 0.0;
         double Kp = 1.0;
         double Ki = 0.07;

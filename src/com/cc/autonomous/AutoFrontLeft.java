@@ -14,15 +14,15 @@ public class AutoFrontLeft extends AutoCommand
 {
     public void doAuto()
     {
-        chassis.driveDistance(36, 0.59, false);
+        chassis.driveDistance(43, 0.59, false);
         Timer.delay(0.5);
         chassis.turnAngle(88, 3);
         Timer.delay(0.5);
-        chassis.driveDistance(170, 0.59, false);
+        chassis.driveDistance(174.3, 0.59, false);
         Timer.delay(0.5);
         chassis.turnAngle(-31, 3);
         Timer.delay(0.5);
-        chassis.driveDistance(52, 0.59, false);
+        chassis.driveDistance(47, 0.59, false);
         Timer.delay(0.5);
 
         doArm();

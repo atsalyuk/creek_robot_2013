@@ -49,14 +49,14 @@ public class Mechanism
                 if ( red )
                 {
                     armState = 1;
-                    armMotor.set( 0.625 );
+                    armMotor.set( 0.640 );
                 }
 
                 break;
 
             case 1: // Stop Motor
 
-               Timer.delay( 0.12 );
+               Timer.delay( 0.55 );
 
                 armState = 2;
                 this.stopArm();
@@ -89,7 +89,7 @@ public class Mechanism
     public void driveArm( double speed )
     {
         armState = 0;
-        armMotor.set( normalize( speed ) );
+        armMotor.set( speed );
     }
 
     public void stopArm()

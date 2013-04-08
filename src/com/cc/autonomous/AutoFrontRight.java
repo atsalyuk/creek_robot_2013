@@ -14,11 +14,11 @@ public class AutoFrontRight extends AutoCommand
 {
     public void doAuto()
     {
-        chassis.driveDistance( 36, 0.59, false);
+        chassis.driveDistance( 49, 0.59, false);
         Timer.delay( 0.5 );
         chassis.turnAngle( 56.31, 3 );
         Timer.delay( 0.5 );
-        chassis.driveDistance( 84, 0.59, false);
+        chassis.driveDistance( 81, 0.59, false);
         Timer.delay( 0.5 );
         
         doArm();
